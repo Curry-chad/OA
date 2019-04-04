@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>制造物联中间件系统</title>
+<title>OA办公管理系统</title>
 <style type="text/css">
 .content {
 	padding: 10px 10px 10px 10px;
