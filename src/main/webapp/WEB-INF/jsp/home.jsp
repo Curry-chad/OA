@@ -31,7 +31,7 @@
 					<div style="position:relative;">
 						<div style="text-align:right;font-size:15px;margin:2px 0 0 0;">
 							<span style="display:inline-block;font-size:20px;color:#c1dff7;margin:0 0 8px 0;">
-								计算机科学与技术学院
+								软件学院
 							</span><br/>
 							
 							<span style="color:#c1dff7;">${activeUser.rolename}:</span>

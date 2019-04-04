@@ -9,7 +9,7 @@
 <meta name="Author" content="华侨大学计算机科学与技术学院" />
 <meta name="keywords" content="生产管理系统--生产进度,设备管理,工艺监控,物料监控,人员监控,质量监控" />
 <meta name="description" content="制造装备物联及生产管理中间件/系统登陆页面" />
-<title>制造物联中间件系统登录页面</title>
+<title>OA办公管理系统登录页面</title>
 <link rel="stylesheet" type="text/css" href="css/login/style.css" />
 <style type="text/css">
 	.download{margin:20px 33px 10px;*margin-bottom:30px;padding:5px;border-radius:3px;-webkit-border-radius:3px;
@@ -23,7 +23,7 @@
 
 <body>
 	<div class="main">
-		<div class="header hide"> 管理系统  </div>
+		<div class="header hide"> OA管理系统  </div>
 		<div class="content">
 			<div class="title hide">管理系统登录</div>
 			<form name="login" action="#" method="post">
