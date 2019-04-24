@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.wcy.gen.mapper.ProcessDocumentMapper" >
+
+    <resultMap id="BaseResultMap" type="org.wcy.gen.model.ProcessDocument" >
+        <id column="document_id" property="documentId" jdbcType="VARCHAR" />
+        <result column="document_type" property="documentType" jdbcType="VARCHAR" />
+        <result column="document_theme" property="documentTheme" jdbcType="VARCHAR" />
+        <result column="document_date" property="documentDate" jdbcType="TIMESTAMP" />
+        <result column="emp_id" property="empId" jdbcType="VARCHAR" />
+        <result column="document_note" property="documentNote" jdbcType="VARCHAR" />
+        <result column="document_file" property="documentFile" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        document_id, document_type, document_theme, document_date, emp_id, document_note, 
+        document_file
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.wcy.gen.model.ProcessDocumentExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List" />
+        from process_document
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from process_document
+        where document_id = #{documentId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from process_document
+        where document_id = #{documentId,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="org.wcy.gen.model.ProcessDocumentExample" >
+        delete from process_document
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="org.wcy.gen.model.ProcessDocument" >
+        insert into process_document (document_id, document_type, document_theme, 
+            document_date, emp_id, document_note, 
+            document_file)
+        values (#{documentId,jdbcType=VARCHAR}, #{documentType,jdbcType=VARCHAR}, #{documentTheme,jdbcType=VARCHAR}, 
+            #{documentDate,jdbcType=TIMESTAMP}, #{empId,jdbcType=VARCHAR}, #{documentNote,jdbcType=VARCHAR}, 
+            #{documentFile,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="org.wcy.gen.model.ProcessDocument" >
+        insert into process_document
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="documentId != null" >
+                document_id,
+            </if>
+            <if test="documentType != null" >
+                document_type,
+            </if>
+            <if test="documentTheme != null" >
+                document_theme,
+            </if>
+            <if test="documentDate != null" >
+                document_date,
+            </if>
+            <if test="empId != null" >
+                emp_id,
+            </if>
+            <if test="documentNote != null" >
+                document_note,
+            </if>
+            <if test="documentFile != null" >
+                document_file,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="documentId != null" >
+                #{documentId,jdbcType=VARCHAR},
+            </if>
+            <if test="documentType != null" >
+                #{documentType,jdbcType=VARCHAR},
+            </if>
+            <if test="documentTheme != null" >
+                #{documentTheme,jdbcType=VARCHAR},
+            </if>
+            <if test="documentDate != null" >
+                #{documentDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="empId != null" >
+                #{empId,jdbcType=VARCHAR},
+            </if>
+            <if test="documentNote != null" >
+                #{documentNote,jdbcType=VARCHAR},
+            </if>
+            <if test="documentFile != null" >
+                #{documentFile,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="org.wcy.gen.model.ProcessDocumentExample" resultType="java.lang.Integer" >
+        select count(*) from process_document
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update process_document
+        <set >
+            <if test="record.documentId != null" >
+                document_id = #{record.documentId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.documentType != null" >
+                document_type = #{record.documentType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.documentTheme != null" >
+                document_theme = #{record.documentTheme,jdbcType=VARCHAR},
+            </if>
+            <if test="record.documentDate != null" >
+                document_date = #{record.documentDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.empId != null" >
+                emp_id = #{record.empId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.documentNote != null" >
+                document_note = #{record.documentNote,jdbcType=VARCHAR},
+            </if>
+            <if test="record.documentFile != null" >
+                document_file = #{record.documentFile,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update process_document
+        set document_id = #{record.documentId,jdbcType=VARCHAR},
+            document_type = #{record.documentType,jdbcType=VARCHAR},
+            document_theme = #{record.documentTheme,jdbcType=VARCHAR},
+            document_date = #{record.documentDate,jdbcType=TIMESTAMP},
+            emp_id = #{record.empId,jdbcType=VARCHAR},
+            document_note = #{record.documentNote,jdbcType=VARCHAR},
+            document_file = #{record.documentFile,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="org.wcy.gen.model.ProcessDocument" >
+        update process_document
+        <set >
+            <if test="documentType != null" >
+                document_type = #{documentType,jdbcType=VARCHAR},
+            </if>
+            <if test="documentTheme != null" >
+                document_theme = #{documentTheme,jdbcType=VARCHAR},
+            </if>
+            <if test="documentDate != null" >
+                document_date = #{documentDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="empId != null" >
+                emp_id = #{empId,jdbcType=VARCHAR},
+            </if>
+            <if test="documentNote != null" >
+                document_note = #{documentNote,jdbcType=VARCHAR},
+            </if>
+            <if test="documentFile != null" >
+                document_file = #{documentFile,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where document_id = #{documentId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="org.wcy.gen.model.ProcessDocument" >
+        update process_document
+        set document_type = #{documentType,jdbcType=VARCHAR},
+            document_theme = #{documentTheme,jdbcType=VARCHAR},
+            document_date = #{documentDate,jdbcType=TIMESTAMP},
+            emp_id = #{empId,jdbcType=VARCHAR},
+            document_note = #{documentNote,jdbcType=VARCHAR},
+            document_file = #{documentFile,jdbcType=VARCHAR}
+        where document_id = #{documentId,jdbcType=VARCHAR}
+    </update>
+</mapper>

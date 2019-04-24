@@ -434,7 +434,7 @@ function initOrderAddFileUpload(){
 	                if(data.data=="success"){
 	                    pd.statusbar.hide();        //删除成功后隐藏进度条等
 	                    $('#image').val('');
-	                    var urls = $('#orderAddForm [name=file]').val().split(",");  //将删除的文件url从urls中移除
+	                    var urls = $('#documentAddForm [name=documentFile]').val().split(",");  //将删除的文件url从urls中移除
 	                    var deletedUrls = [];
 	                	for(var i in urls){
 	                		if(urls[i] != fileUrl){
@@ -442,7 +442,7 @@ function initOrderAddFileUpload(){
 	                		}
 	                	}
 	                	deletedUrls = deletedUrls.join(",");
-	                	$('#orderAddForm [name=file]').val(deletedUrls);
+	                	$('#documentAddForm [name=documentFile]').val(deletedUrls);
 	                 }else{
 	                        console.log(data.message);  //打印服务器返回的错误信息
 	                 }
@@ -454,11 +454,11 @@ function initOrderAddFileUpload(){
 	        //上传成功后的回调方法。本例中是将返回的文件名保到一个hidden类开的input中，以便后期数据处理
 	        if(data&&data.error==0){
 	        	$.messager.alert('提示','上传完成!');
-	        	if( $('#orderAddForm [name=file]').val() != null && $('#orderAddForm [name=file]').val() != ''){
+	        	if( $('#documentAddForm [name=documentFile]').val() != null && $('#documentAddForm [name=documentFile]').val() != ''){
 	        		/* alert($('#orderAddForm [name=file]').val()); */
-	        		$('#orderAddForm [name=file]').val($('#orderAddForm [name=file]').val()+","+data.url);
+	        		$('#documentAddForm [name=documentFile]').val($('#documentAddForm [name=documentFile]').val()+","+data.url);
 	        	}else{
-	            	$('#orderAddForm [name=file]').val(data.url);
+	            	$('#documentAddForm [name=documentFile]').val(data.url);
 	        	}
 	        }
 	    }
@@ -467,7 +467,7 @@ function initOrderAddFileUpload(){
 
 //加载文件上传插件
 function initOrderEditFileUpload(){
-	$("#orderEditFileUploader").uploadFile({
+	$("#documentEditFileUploader").uploadFile({
 		url:"file/upload",
 		maxFileCount: 5,                //上传文件个数（多个时修改此处
 	    returnType: 'json',              //服务返回数据
@@ -489,7 +489,7 @@ function initOrderEditFileUpload(){
 	                if(data.data=="success"){
 	                    pd.statusbar.hide();        //删除成功后隐藏进度条等
 	                    $('#image').val('');
-	                    var urls = $('#orderEditForm [name=file]').val().split(",");  //将删除的文件url从urls中移除
+	                    var urls = $('#documentEditForm [name=documentFile]').val().split(",");  //将删除的文件url从urls中移除
 	                    var deletedUrls = [];
 	                	for(var i in urls){
 	                		if(urls[i] != fileUrl){
@@ -497,7 +497,7 @@ function initOrderEditFileUpload(){
 	                		}
 	                	}
 	                	deletedUrls = deletedUrls.join(",");
-	                	$('#orderEditForm [name=file]').val(deletedUrls);
+	                	$('#documentEditForm [name=documentFile]').val(deletedUrls);
 	                 }else{
 	                        console.log(data.message);  //打印服务器返回的错误信息
 	                 }
@@ -509,11 +509,11 @@ function initOrderEditFileUpload(){
 	        //上传成功后的回调方法。本例中是将返回的文件名保到一个hidden类开的input中，以便后期数据处理
 	        if(data&&data.error==0){
 	        	$.messager.alert('提示','上传完成!');
-	        	if( $('#orderEditForm [name=file]').val() != null && $('#orderEditForm [name=file]').val() != ''){
+	        	if( $('#documentEditForm [name=documentFile]').val() != null && $('#documentEditForm [name=documentFile]').val() != ''){
 	        		/*alert($('#orderEditForm [name=file]').val()); */
-	        		$('#orderEditForm [name=file]').val($('#orderEditForm [name=file]').val()+","+data.url);
+	        		$('#documentEditForm [name=documentFile]').val($('#documentEditForm [name=documentFile]').val()+","+data.url);
 	        	}else{
-	            	$('#orderEditForm [name=file]').val(data.url);
+	            	$('#documentEditForm [name=documentFile]').val(data.url);
 	        	}
 	        }
 	    }

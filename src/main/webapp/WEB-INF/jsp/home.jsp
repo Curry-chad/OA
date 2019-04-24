@@ -31,7 +31,7 @@
 					<div style="position:relative;">
 						<div style="text-align:right;font-size:15px;margin:2px 0 0 0;">
 							<span style="display:inline-block;font-size:20px;color:#c1dff7;margin:0 0 8px 0;">
-								软件学院
+								东华理工大学软件学院
 							</span><br/>
 							
 							<span style="color:#c1dff7;">${activeUser.rolename}:</span>
@@ -63,90 +63,88 @@
 			<!---------------------------------------------------->
 		</div>
 
-		<div title="计划进度" data-options="selected:true" style="padding:10px;">
+		<div title="文档管理" data-options="selected:true" style="padding:10px;">
 			<ul id="scheduleMonitor" class="easyui-tree" data-options="animate:true,lines:true">
-				<li><span>计划进度</span>
+				<li><span>文档管理</span>
 					<ul>
-						<li id=11 data-options="attributes:{'url':'order/find'}">订单管理</li>
+						<li id=11 data-options="attributes:{'url':'processDocument/find'}">过程文档管理</li>
 					</ul>
 					<ul>
-						<li id=12 data-options="attributes:{'url':'custom/find'}">客户管理</li>
+						<li id=12 data-options="attributes:{'url':'custom/find'}">报表管理</li>
 					</ul>
 					<ul>
-						<li id=13 data-options="attributes:{'url':'product/find'}">产品管理</li>
+						<li id=13 data-options="attributes:{'url':'product/find'}">技术资料管理</li>
 					</ul>
 					<ul>
-						<li id=14 data-options="attributes:{'url':'work/find'}">作业管理</li>
+						<li id=14 data-options="attributes:{'url':'work/find'}">通知文件管理</li>
 					</ul>
 					<ul>
-						<li id=15 data-options="attributes:{'url':'manufacture/find'}">生产计划管理</li>
+						<li id=15 data-options="attributes:{'url':'manufacture/find'}">工作计划管理</li>
 					</ul>
 					<ul>
-						<li id=16 data-options="attributes:{'url':'task/find'}">生产派工管理</li>
+						<li id=16 data-options="attributes:{'url':'task/find'}">公告栏</li>
 					</ul>
 				</li>
 			</ul>
 		</div>
 
-		<div title="设备管理" data-options="selected:true" style="padding:10px">
+		<div title="项目管理" data-options="selected:true" style="padding:10px">
 			<ul id="deviceMonitor" class="easyui-tree" data-options="animate:true,lines:true">
-				<li><span>设备管理</span>
+				<li><span>项目管理</span>
 					<ul>
-						<li id=21 data-options="attributes:{'url':'device/deviceList'}">设备台账</li>
-						<li id=22 data-options="attributes:{'url':'device/deviceType'}">设备种类</li>
-						<li id=23 data-options="attributes:{'url':'device/deviceCheck'}">设备例检</li>
-						<li id=24 data-options="attributes:{'url':'device/deviceFault'}">设备故障</li>
-						<li id=25 data-options="attributes:{'url':'device/deviceMaintain'}">设备维修</li>
+						<li id=21 data-options="attributes:{'url':'device/deviceList'}">项目总体概况</li>
+						<li id=22 data-options="attributes:{'url':'device/deviceType'}">项目时间管理</li>
+						<li id=23 data-options="attributes:{'url':'device/deviceCheck'}">项目质量管理</li>
+						<li id=24 data-options="attributes:{'url':'device/deviceFault'}">项目成本管理</li>
+						<li id=25 data-options="attributes:{'url':'device/deviceMaintain'}">项目范围管理</li>
 					</ul></li>
 			</ul>
 		</div>
 
-		<div title="工艺监控" data-options="selected:true" style="padding:10px">
+		<div title="论坛管理" data-options="selected:true" style="padding:10px">
 			<ul id="technologyMonitor" class="easyui-tree" data-options="animate:true,lines:true">
-				<li><span>工艺监控</span>
+				<li><span>论坛管理</span>
 					<ul>
-						<li id=31 data-options="attributes:{'url':'technology/find'}">工艺管理</li>
-						<li id=32 data-options="attributes:{'url':'technologyRequirement/find'}">工艺要求</li>
-						<li id=33 data-options="attributes:{'url':'technologyPlan/find'}">工艺计划</li>
-						<li id=34 data-options="attributes:{'url':'process/find'}">工序管理</li>
+						<li id=31 data-options="attributes:{'url':'technology/find'}">工作讨论</li>
+						<li id=32 data-options="attributes:{'url':'technologyRequirement/find'}">心声社区</li>
+						<li id=33 data-options="attributes:{'url':'technologyPlan/find'}">寻物启事</li>
 					</ul>
 				</li>
 			</ul>
 		</div>
 		
-		<div title="物料监控" data-options="selected:true" style="padding:10px">
+		<div title="邮件管理" data-options="selected:true" style="padding:10px">
 		
 			<ul id="materialMonitor" class="easyui-tree" data-options="animate:true,lines:true">
-				<li><span>物料监控 </span>
+				<li><span>邮件管理 </span>
 					<ul>
-						<li id=41 data-options="attributes:{'url':'material/find'}">物料信息</li>
-						<li id=42 data-options="attributes:{'url':'materialReceive/find'}">物料收入</li>
-				    	<li id=43 data-options="attributes:{'url':'materialConsume/find'}">物料消耗</li>	 					
+						<li id=41 data-options="attributes:{'url':'material/find'}">发件箱</li>
+						<li id=42 data-options="attributes:{'url':'materialReceive/find'}">收件箱</li>
+				    	<li id=43 data-options="attributes:{'url':'materialConsume/find'}">查询邮件</li>	 					
 					</ul>
 				</li>
 			</ul>
 		</div>
 		
-		<div title="质量监控" data-options="selected:true" style="padding:10px;">
+		<div title="工作流" data-options="selected:true" style="padding:10px;">
 			<ul id="qualifyMonitor" class="easyui-tree"
 				data-options="animate:true,lines:true">
-				<li><span>质量监控</span>
+				<li><span>工作流</span>
 					<ul>
-						<li id=51 data-options="attributes:{'url':'unqualify/find'}">不合格品管理</li>
-						<li id=52 data-options="attributes:{'url':'measure/find'}">成品计量质检</li>
-						<li id=53 data-options="attributes:{'url':'f_count_check/find'}">成品计数质检</li>
-						<li id=54 data-options="attributes:{'url':'p_measure_check/find'}">工序计量质检</li>
-						<li id=55 data-options="attributes:{'url':'p_count_check/find'}">工序计数质检</li>
+						<li id=51 data-options="attributes:{'url':'unqualify/find'}">入职办理</li>
+						<li id=52 data-options="attributes:{'url':'measure/find'}">离职办理</li>
+						<li id=53 data-options="attributes:{'url':'f_count_check/find'}">工时管理</li>
+						<li id=54 data-options="attributes:{'url':'p_measure_check/find'}">休假流程</li>
 					</ul>
 				</li>
 			</ul>
 
 		</div>
 		
-		<div title="人员监控" data-options="selected:true" style="padding:10px">
+		<div title="人事管理" data-options="selected:true" style="padding:10px">
 			<ul id="employeeMonitor" class="easyui-tree"
 				data-options="animate:true,lines:true">
-				<li><span>人员监控</span>
+				<li><span>人事管理</span>
 					<ul>
 						<li id=61 data-options="attributes:{'url':'department/find'}">部门管理</li>
 					</ul>
@@ -185,12 +183,12 @@
 	<script type="text/javascript">
 
 		var allItem = [
-						["计划进度","订单管理","客户管理","产品管理","作业管理","生产计划管理","生产派工管理"], 
-						["设备管理","设备台账","设备种类","设备例检","设备故障","设备维修"],
-						["工艺监控","工艺","工艺要求","工艺计划","工序"],
-						["物料监控","物料信息","物料收入","物料消耗"],
-						["质量监控","不合格品管理","成品计量质检","成品计数质检","工序计量质检","工序计数质检"],
-						["人员监控","部门管理","员工管理"]
+						["文档管理","过程文档管理","报表管理","技术资料管理","通知文件管理","工作计划管理","公告栏"], 
+						["项目管理","项目总体概况","项目时间管理","项目质量管理","项目成本管理","项目范围管理"],
+						["论坛管理","工作交流","心声社区","寻物启事"],
+						["邮件管理","收件箱","发件箱","查询邮件"],
+						["工作流","入职办理","离职办理","工时管理","休假管理"],
+						["人事管理","部门管理","员工管理"]
 					  ];
 					  
 		function isContains(str, substr) {
