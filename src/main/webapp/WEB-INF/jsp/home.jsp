@@ -70,7 +70,7 @@
 						<li id=11 data-options="attributes:{'url':'processDocument/find'}">过程文档管理</li>
 					</ul>
 					<ul>
-						<li id=12 data-options="attributes:{'url':'custom/find'}">报表管理</li>
+						<li id=12 data-options="attributes:{'url':'report/find'}">报表管理</li>
 					</ul>
 					<ul>
 						<li id=13 data-options="attributes:{'url':'product/find'}">技术资料管理</li>

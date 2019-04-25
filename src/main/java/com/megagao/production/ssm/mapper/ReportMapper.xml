@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.megagao.production.ssm.mapper.ProcessDocumentMapper" >
-  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.vo.ProcessDocumentVO" >
-    <id column="document_id" property="documentId" jdbcType="VARCHAR" />
-    <result column="document_type" property="documentType" jdbcType="VARCHAR" />
-    <result column="document_theme" property="documentTheme" jdbcType="VARCHAR" />
-    <result column="document_date" property="documentDate" jdbcType="TIMESTAMP" />
-    <result column="document_note" property="documentNote" jdbcType="VARCHAR" />
-    <result column="document_file" property="documentFile" jdbcType="VARCHAR" />
+<mapper namespace="com.megagao.production.ssm.mapper.ReportMapper" >
+  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.vo.ReportVO" >
+    <id column="report_id" property="reportId" jdbcType="VARCHAR" />
+    <result column="report_type" property="reportType" jdbcType="VARCHAR" />
+    <result column="report_theme" property="reportTheme" jdbcType="VARCHAR" />
+    <result column="report_date" property="reportDate" jdbcType="TIMESTAMP" />
+    <result column="report_note" property="reportNote" jdbcType="VARCHAR" />
+    <result column="report_file" property="reportFile" jdbcType="VARCHAR" />
     <association property="employee" javaType="employee">
      <id column="emp_id" property="empId" jdbcType="VARCHAR" />
     <result column="emp_name" property="empName" jdbcType="VARCHAR" />
@@ -25,83 +25,83 @@
   </resultMap>
 	<!-- 扩展的sql -->
 	<!-- 查询所有记录 -->
-	<select id="find" parameterType="ProcessDocumentVO" resultMap="BaseResultMap">
+	<select id="find" parameterType="ReportVO" resultMap="BaseResultMap">
 		SELECT
-			document_id,
-			document_type,
-			document_theme,
-			document_date,
+			report_id,
+			report_type,
+			report_theme,
+			report_date,
 			emp_id,
-			document_note,
-			document_file
+			report_note,
+			report_file
 		FROM
-			process_document
-		<!-- LEFT JOIN employee ON process_document.emp_id = employee.emp_id -->
+			report
+		<!-- LEFT JOIN employee ON report.emp_id = employee.emp_id -->
 	</select>
 	
-	<select id="searchDocumentByDocumentId" parameterType="string" resultMap="BaseResultMap">
+	<select id="searchReportByReportId" parameterType="string" resultMap="BaseResultMap">
 		SELECT
-			document_id,
-			document_type,
-			document_theme,
-			document_date,
+			report_id,
+			report_type,
+			report_theme,
+			report_date,
 			emp_id,
-			document_note,
-			document_file
+			report_note,
+			report_file
 		FROM
-			process_document
+			report
 		WHERE 
-			document_id like CONCAT('%',#{documentId},'%' ) 
+			report_id like CONCAT('%',#{reportId},'%' ) 
 	</select>
 	
-	<select id="searchDocumentByDocumentType" parameterType="string" resultMap="BaseResultMap">
+	<select id="searchReportByReportType" parameterType="string" resultMap="BaseResultMap">
 		SELECT
-			document_id,
-			document_type,
-			document_theme,
-			document_date,
+			report_id,
+			report_type,
+			report_theme,
+			report_date,
 			emp_id,
-			document_note,
-			document_file
+			report_note,
+			report_file
 		FROM
-			process_document
+			report
 		WHERE 
-			document_type like CONCAT('%',#{documentType},'%' ) 
+			report_type like CONCAT('%',#{reportType},'%' ) 
 	</select>
 	
-	<select id="searchDocumentByDocumentTheme" parameterType="string" resultMap="BaseResultMap">
+	<select id="searchReportByReportTheme" parameterType="string" resultMap="BaseResultMap">
 		SELECT
-			document_id,
-			document_type,
-			document_theme,
-			document_date,
+			report_id,
+			report_type,
+			report_theme,
+			report_date,
 			emp_id,
-			document_note,
-			document_file
+			report_note,
+			report_file
 		FROM
-			process_document
+			report
 		WHERE 
-			document_theme like CONCAT('%',#{documentTheme},'%' ) 
+			report_theme like CONCAT('%',#{reportTheme},'%' ) 
 	</select>
 	
 	<!-- 批量删除 -->
 	<delete id="deleteBatch">
 		DELETE
 		FROM
-			process_document
+			report
 		WHERE
-			document_id IN
+			report_id IN
 		<foreach collection="array" item="id" open="(" close=")" separator=",">
 			#{id}
 		</foreach>
 	</delete>
 	
 	<!-- 修改备注-->
-	<update id="updateDocumentNote" parameterType="ProcessDocumentVO" >
-		UPDATE process_document
-		SET document_note = #{documentNote}
+	<update id="updateReportNote" parameterType="ReportVO" >
+		UPDATE report
+		SET report_note = #{reportNote}
 		WHERE
-			document_id = #{documentId,jdbcType=VARCHAR}
+			report_id = #{reportId,jdbcType=VARCHAR}
 	</update>
 	
 <sql id="Example_Where_Clause" >
@@ -165,18 +165,18 @@
     </sql>
 
     <sql id="Base_Column_List" >
-        document_id, document_type, document_theme, document_date, emp_id, document_note, 
-        document_file
+        report_id, report_type, report_theme, report_date, emp_id, report_note, 
+        report_file
     </sql>
 
-    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.ProcessDocumentExample" >
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.ReportExample" >
         select
         <if test="distinct" >
             distinct
         </if>
         'true' as QUERYID,
         <include refid="Base_Column_List" />
-        from process_document
+        from report
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
@@ -188,111 +188,111 @@
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
         select 
         <include refid="Base_Column_List" />
-        from process_document
-        where document_id = #{documentId,jdbcType=VARCHAR}
+        from report
+        where report_id = #{reportId,jdbcType=VARCHAR}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-        delete from process_document
-        where document_id = #{documentId,jdbcType=VARCHAR}
+        delete from report
+        where report_id = #{reportId,jdbcType=VARCHAR}
     </delete>
 
-    <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.ProcessDocumentExample" >
-        delete from process_document
+    <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.ReportExample" >
+        delete from report
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
     </delete>
 
-    <insert id="insert" parameterType="com.megagao.production.ssm.domain.ProcessDocument" >
-        insert into process_document (document_id, document_type, document_theme, 
-            document_date, emp_id, document_note, 
-            document_file)
-        values (#{documentId,jdbcType=VARCHAR}, #{documentType,jdbcType=VARCHAR}, #{documentTheme,jdbcType=VARCHAR}, 
-            #{documentDate,jdbcType=TIMESTAMP}, #{empId,jdbcType=VARCHAR}, #{documentNote,jdbcType=VARCHAR}, 
-            #{documentFile,jdbcType=VARCHAR})
+    <insert id="insert" parameterType="com.megagao.production.ssm.domain.ReportExample" >
+        insert into report (report_id, report_type, report_theme, 
+            report_date, emp_id, report_note, 
+            report_file)
+        values (#{reportId,jdbcType=VARCHAR}, #{reportType,jdbcType=VARCHAR}, #{reportTheme,jdbcType=VARCHAR}, 
+            #{reportDate,jdbcType=TIMESTAMP}, #{empId,jdbcType=VARCHAR}, #{reportNote,jdbcType=VARCHAR}, 
+            #{reportFile,jdbcType=VARCHAR})
     </insert>
 
-    <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.ProcessDocument" >
-        insert into process_document
+    <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.Report" >
+        insert into report
         <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="documentId != null" >
-                document_id,
+            <if test="reportId != null" >
+                report_id,
             </if>
-            <if test="documentType != null" >
-                document_type,
+            <if test="reportType != null" >
+                report_type,
             </if>
-            <if test="documentTheme != null" >
-                document_theme,
+            <if test="reportTheme != null" >
+                report_theme,
             </if>
-            <if test="documentDate != null" >
-                document_date,
+            <if test="reportDate != null" >
+                report_date,
             </if>
             <if test="empId != null" >
                 emp_id,
             </if>
-            <if test="documentNote != null" >
-                document_note,
+            <if test="reportNote != null" >
+                report_note,
             </if>
-            <if test="documentFile != null" >
-                document_file,
+            <if test="reportFile != null" >
+                report_file,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="documentId != null" >
-                #{documentId,jdbcType=VARCHAR},
+            <if test="reportId != null" >
+                #{reportId,jdbcType=VARCHAR},
             </if>
-            <if test="documentType != null" >
-                #{documentType,jdbcType=VARCHAR},
+            <if test="reportType != null" >
+                #{reportType,jdbcType=VARCHAR},
             </if>
-            <if test="documentTheme != null" >
-                #{documentTheme,jdbcType=VARCHAR},
+            <if test="reportTheme != null" >
+                #{reportTheme,jdbcType=VARCHAR},
             </if>
-            <if test="documentDate != null" >
-                #{documentDate,jdbcType=TIMESTAMP},
+            <if test="reportDate != null" >
+                #{reportDate,jdbcType=TIMESTAMP},
             </if>
             <if test="empId != null" >
                 #{empId,jdbcType=VARCHAR},
             </if>
-            <if test="documentNote != null" >
-                #{documentNote,jdbcType=VARCHAR},
+            <if test="reportNote != null" >
+                #{reportNote,jdbcType=VARCHAR},
             </if>
-            <if test="documentFile != null" >
-                #{documentFile,jdbcType=VARCHAR},
+            <if test="reportFile != null" >
+                #{reportFile,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
 
-    <select id="countByExample" parameterType="com.megagao.production.ssm.domain.ProcessDocumentExample" resultType="java.lang.Integer" >
-        select count(*) from process_document
+    <select id="countByExample" parameterType="com.megagao.production.ssm.domain.ReportExample" resultType="java.lang.Integer" >
+        select count(*) from report
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
     </select>
 
     <update id="updateByExampleSelective" parameterType="map" >
-        update process_document
+        update report
         <set >
-            <if test="record.documentId != null" >
-                document_id = #{record.documentId,jdbcType=VARCHAR},
+            <if test="record.reportId != null" >
+                report_id = #{record.reportId,jdbcType=VARCHAR},
             </if>
-            <if test="record.documentType != null" >
-                document_type = #{record.documentType,jdbcType=VARCHAR},
+            <if test="record.reportType != null" >
+                report_type = #{record.reportType,jdbcType=VARCHAR},
             </if>
-            <if test="record.documentTheme != null" >
-                document_theme = #{record.documentTheme,jdbcType=VARCHAR},
+            <if test="record.reportTheme != null" >
+                report_theme = #{record.reportTheme,jdbcType=VARCHAR},
             </if>
-            <if test="record.documentDate != null" >
-                document_date = #{record.documentDate,jdbcType=TIMESTAMP},
+            <if test="record.reportDate != null" >
+                report_date = #{record.reportDate,jdbcType=TIMESTAMP},
             </if>
             <if test="record.empId != null" >
                 emp_id = #{record.empId,jdbcType=VARCHAR},
             </if>
-            <if test="record.documentNote != null" >
-                document_note = #{record.documentNote,jdbcType=VARCHAR},
+            <if test="record.reportNote != null" >
+                report_note = #{record.reportNote,jdbcType=VARCHAR},
             </if>
-            <if test="record.documentFile != null" >
-                document_file = #{record.documentFile,jdbcType=VARCHAR},
+            <if test="record.reportFile != null" >
+                report_file = #{record.reportFile,jdbcType=VARCHAR},
             </if>
         </set>
         <if test="_parameter != null" >
@@ -301,52 +301,52 @@
     </update>
 
     <update id="updateByExample" parameterType="map" >
-        update process_document
-        set document_id = #{record.documentId,jdbcType=VARCHAR},
-            document_type = #{record.documentType,jdbcType=VARCHAR},
-            document_theme = #{record.documentTheme,jdbcType=VARCHAR},
-            document_date = #{record.documentDate,jdbcType=TIMESTAMP},
+        update report
+        set report_id = #{record.reportId,jdbcType=VARCHAR},
+            report_type = #{record.reportType,jdbcType=VARCHAR},
+            report_theme = #{record.reportTheme,jdbcType=VARCHAR},
+            report_date = #{record.reportDate,jdbcType=TIMESTAMP},
             emp_id = #{record.empId,jdbcType=VARCHAR},
-            document_note = #{record.documentNote,jdbcType=VARCHAR},
-            document_file = #{record.documentFile,jdbcType=VARCHAR}
+            report_note = #{record.reportNote,jdbcType=VARCHAR},
+            report_file = #{record.reportFile,jdbcType=VARCHAR}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
         </if>
     </update>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.ProcessDocument" >
-        update process_document
+    <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.Report" >
+        update report
         <set >
-            <if test="documentType != null" >
-                document_type = #{documentType,jdbcType=VARCHAR},
+            <if test="reportType != null" >
+                report_type = #{reportType,jdbcType=VARCHAR},
             </if>
-            <if test="documentTheme != null" >
-                document_theme = #{documentTheme,jdbcType=VARCHAR},
+            <if test="reportTheme != null" >
+                report_theme = #{reportTheme,jdbcType=VARCHAR},
             </if>
-            <if test="documentDate != null" >
-                document_date = #{documentDate,jdbcType=TIMESTAMP},
+            <if test="reportDate != null" >
+                report_date = #{reportDate,jdbcType=TIMESTAMP},
             </if>
             <if test="empId != null" >
                 emp_id = #{empId,jdbcType=VARCHAR},
             </if>
-            <if test="documentNote != null" >
-                document_note = #{documentNote,jdbcType=VARCHAR},
+            <if test="reportNote != null" >
+                report_note = #{reportNote,jdbcType=VARCHAR},
             </if>
-            <if test="documentFile != null" >
-                document_file = #{documentFile,jdbcType=VARCHAR},
+            <if test="reportFile != null" >
+                report_file = #{reportFile,jdbcType=VARCHAR},
             </if>
         </set>
-        where document_id = #{documentId,jdbcType=VARCHAR}
+        where report_id = #{reportId,jdbcType=VARCHAR}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.ProcessDocument" >
-        update process_document
-        set document_type = #{documentType,jdbcType=VARCHAR},
-            document_theme = #{documentTheme,jdbcType=VARCHAR},
-            document_date = #{documentDate,jdbcType=TIMESTAMP},
+    <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.Report" >
+        update report
+        set report_type = #{reportType,jdbcType=VARCHAR},
+            report_theme = #{reportTheme,jdbcType=VARCHAR},
+            report_date = #{reportDate,jdbcType=TIMESTAMP},
             emp_id = #{empId,jdbcType=VARCHAR},
-            document_note = #{documentNote,jdbcType=VARCHAR},
-            document_file = #{documentFile,jdbcType=VARCHAR}
-        where document_id = #{documentId,jdbcType=VARCHAR}
+            report_note = #{reportNote,jdbcType=VARCHAR},
+            report_file = #{reportFile,jdbcType=VARCHAR}
+        where report_id = #{reportId,jdbcType=VARCHAR}
     </update>
 </mapper>

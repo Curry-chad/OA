@@ -1,5 +1,6 @@
 package com.megagao.production.ssm.controller.scheduling;
 
+import java.net.URLDecoder;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -129,6 +130,7 @@ public class ProcessDocumentController {
 	@RequestMapping("/search_document_by_documentId")
 	@ResponseBody
 	public EUDataGridResult searchDocumentByDocumentId(Integer page, Integer rows, String searchValue) throws Exception{
+		searchValue=URLDecoder.decode(searchValue,"UTF-8");   
 		EUDataGridResult result = processService.searchDocumentByDocumentId(page, rows, searchValue);
 		return result;
 	}
@@ -137,6 +139,7 @@ public class ProcessDocumentController {
 	@RequestMapping("/search_document_by_documentType")
 	@ResponseBody
 	public EUDataGridResult searchDocumentByDocumentType(Integer page, Integer rows, String searchValue) throws Exception{
+		searchValue=URLDecoder.decode(searchValue,"UTF-8"); 
 		EUDataGridResult result = processService.searchDocumentByDocumentType(page, rows, searchValue);
 		return result;
 	}
@@ -145,6 +148,7 @@ public class ProcessDocumentController {
 	@RequestMapping("/search_document_by_documentTheme")
 	@ResponseBody
 	public EUDataGridResult searchDocumentByDocumentTheme(Integer page, Integer rows, String searchValue) throws Exception{
+		searchValue=URLDecoder.decode(searchValue,"UTF-8");   
 		EUDataGridResult result = processService.searchDocumentByDocumentTheme(page, rows, searchValue);
 		return result;
 	}

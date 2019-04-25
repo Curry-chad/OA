@@ -59,9 +59,8 @@ public class FileController {
 	
 	@RequestMapping(value="/file/download")
 	public void handleFileDownload(@RequestParam String fileName, HttpServletResponse response) throws Exception{
-		String file = new String(fileName.getBytes("iso-8859-1"), "UTF-8");
-		fileName = file.substring(file.lastIndexOf("/")+1);
-		String filePath = "D:\\upload\\temp\\file\\"+fileName;
+		fileName = fileName.substring(fileName.lastIndexOf("/") + 1);
+		String filePath = "D:\\upload\\temp\\file\\" + fileName;
 		DownloadUtil du = new DownloadUtil();
 		du.download(filePath, fileName, response, false);
 	}

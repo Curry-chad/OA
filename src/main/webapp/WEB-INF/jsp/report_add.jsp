@@ -9,30 +9,30 @@
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 
 <div style="padding:10px 10px 10px 10px"> 
-	<form id="documentAddForm" class="orderForm" method="post">
+	<form id="reportAddForm" class="orderForm" method="post">
 	    <table cellpadding="5" >
 	        <tr>
-	            <td>文档编号:</td>
+	            <td>报表编号:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="documentId" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="reportId" data-options="required:true"></input>
 	            </td>
 	        </tr>
 	        <tr>
-	            <td>文档类型:</td>
+	            <td>报表类型:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="documentType" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="reportType" data-options="required:true"></input>
 	            </td>
 	        </tr>
 	        <tr>
-	            <td>文档主题:</td>
+	            <td>报表主题:</td>
 	            <td>
-	            	<input class="easyui-textbox" type="text" name="documentTheme" data-options="required:true"></input>
+	            	<input class="easyui-textbox" type="text" name="reportTheme" data-options="required:true"></input>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>上传日期:</td>
 	            <td>
-					<input class="easyui-datetimebox" name="documentDate" data-options="required:true,showSeconds:true"
+					<input class="easyui-datetimebox" name="reportDate" data-options="required:true,showSeconds:true"
 						   value="date.format('yyyy-MM-dd hh:mm:ss')" style="width:150px">
 				</td>
 	        </tr>
@@ -47,62 +47,62 @@
 	            <td>
 	                 <!-- <iframe src="file_upload.jsp"></iframe>  -->
 	                 <div id="orderAddFileUploader">上传文件</div>
-	                 <input type="hidden" id="orderAddFile" name="documentFile"/>
+	                 <input type="hidden" id="orderAddFile" name="reportFile"/>
 	            </td>
 	        </tr>
 	        <tr>
-	            <td>文档备注:</td>
+	            <td>报表备注:</td>
 	            <td>
-	                <textarea style="width:800px;height:300px;visibility:hidden;" name="documentNote"></textarea>
+	                <textarea style="width:800px;height:300px;visibility:hidden;" name="reportNote"></textarea>
 	            </td>
 	        </tr>
 	    </table>
 	    <input type="hidden" name="orderParams"/>
 	</form>
 	<div style="padding:5px">
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitdocumentAddForm()">提交</a>
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="cleardocumentAddForm()">重置</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitreportAddForm()">提交</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearreportAddForm()">重置</a>
 	</div>
 </div>
 <script type="text/javascript">
 	
-	var documentAddEditor ;
+	var reportAddEditor ;
 	//页面初始化完毕后执行此方法
 	$(function(){
 		//加载文件上传插件
 		initOrderAddFileUpload();
 		//创建富文本编辑器
-		//documentAddEditor = TAOTAO.createEditor("#documentAddForm [name=file]");
-		documentAddEditor = KindEditor.create("#documentAddForm [name=documentNote]", TT.kingEditorParams);
+		//reportAddEditor = TAOTAO.createEditor("#reportAddForm [name=file]");
+		reportAddEditor = KindEditor.create("#reportAddForm [name=reportNote]", TT.kingEditorParams);
 	});
 	
 	//提交表单
-	function submitdocumentAddForm(){
+	function submitreportAddForm(){
 		//有效性验证
-		if(!$('#documentAddForm').form('validate')){
+		if(!$('#reportAddForm').form('validate')){
 			$.messager.alert('提示','表单还未填写完成!');
 			return ;
 		}
 		//同步文本框中的订单要求
-		documentAddEditor.sync();
+		reportAddEditor.sync();
 		
 		//ajax的post方式提交表单
-		//$("#documentAddForm").serialize()将表单序列号为key-value形式的字符串
-		$.post("processDocument/insert",$("#documentAddForm").serialize(), function(data){
+		//$("#reportAddForm").serialize()将表单序列号为key-value形式的字符串
+		$.post("report/insert",$("#reportAddForm").serialize(), function(data){
 			if(data.status == 200){
-				$.messager.alert('提示','新增过程文档成功!');
-				cleardocumentAddForm();
-				$("#documentAddWindow").window('close');
+				$.messager.alert('提示','新增报表成功!');
+				clearreportAddForm();
+				$("#reportAddWindow").window('close');
 				$(".ajax-file-upload-container > .ajax-file-upload-statusbar").remove();
-				$("#documentList").datagrid("reload");
+				$("#reportList").datagrid("reload");
 			}else{
 				$.messager.alert('提示',data.msg);
 			}
 		});
 	}
 	
-	function cleardocumentAddForm(){
-		$('#documentAddForm').form('reset');
-		documentAddEditor.html('');
+	function clearreportAddForm(){
+		$('#reportAddForm').form('reset');
+		reportAddEditor.html('');
 	}
 </script>
