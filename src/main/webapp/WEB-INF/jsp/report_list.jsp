@@ -142,7 +142,7 @@ function doSearch_order(value,name){ //用户输入用户名,点击搜素,触发
 		}
 	};
 	
-	//格式化订单要求
+	//格式化报表要求
 	function formatOrderNote(value, row, index){ 
 		if(value !=null && value != ''){
 			return "<a href=javascript:openReportNote("+index+")>"+"报表备注"+"</a>";
@@ -218,7 +218,7 @@ function doSearch_order(value,name){ //用户输入用户名,点击搜素,触发
     	});
 	}
 	
-	//打开订单要求富文本编辑器对话框
+	//打开报表要求富文本编辑器对话框
 	function  openReportNote(index){ 
 		var row = onReportClickRow(index);
 		$("#reportNoteDialog").dialog({
@@ -236,7 +236,7 @@ function doSearch_order(value,name){ //用户输入用户名,点击搜素,触发
 		
 	};
 	
-	//更新订单要求
+	//更新报表要求
 	function updateReportNote(){
 		$.get("order/edit_judge",'',function(data){
     		if(data.msg != null){
@@ -321,15 +321,15 @@ function doSearch_order(value,name){ //用户输入用户名,点击搜素,触发
       		}else{
       			var ids = getOrderSelectionsIds();
               	if(ids.length == 0){
-              		$.messager.alert('提示','未选中订单!');
+              		$.messager.alert('提示','未选中报表!');
               		return ;
               	}
-              	$.messager.confirm('确认','确定删除ID为 '+ids+' 的订单吗？',function(r){
+              	$.messager.confirm('确认','确定删除ID为 '+ids+' 的报表吗？',function(r){
               	    if (r){
               	    	var params = {"ids":ids};
                       	$.post("report/delete_batch",params, function(data){
                   			if(data.status == 200){
-                  				$.messager.alert('提示','删除订单成功!',undefined,function(){
+                  				$.messager.alert('提示','删除报表成功!',undefined,function(){
                   					$("#reportList").datagrid("reload");
                   				});
                   			}
