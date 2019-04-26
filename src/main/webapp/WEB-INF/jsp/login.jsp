@@ -6,11 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="copyright" content="Copyright 2016" />
-<meta name="Author" content="华侨大学计算机科学与技术学院" />
-<meta name="keywords" content="生产管理系统--生产进度,设备管理,工艺监控,物料监控,人员监控,质量监控" />
-<meta name="description" content="制造装备物联及生产管理中间件/系统登陆页面" />
+<meta name="Author" content="东华理工大学软件学院" />
+<meta name="keywords" content="OA管理系统--文档管理,项目管理,论坛管理,邮件管理,人事管理,系统管理" />
+<meta name="description" content="基于B/S架构的OA/系统登陆页面" />
 <title>OA办公管理系统登录页面</title>
 <link rel="stylesheet" type="text/css" href="css/login/style.css" />
+<script src="js/jquery.min.js"></script>
+        <script src="js/jquery.cookie.js"></script>
+        <script src="js/jquery.base64.js"></script>
 <style type="text/css">
 	.download{margin:20px 33px 10px;*margin-bottom:30px;padding:5px;border-radius:3px;-webkit-border-radius:3px;
 		-moz-border-radius:3px;background:#e6e6e6;border:1px dashed #df0031;font-size:14px;font-family:Comic Sans MS;
@@ -21,7 +24,7 @@
 </style>
 </head>
 
-<body>
+<body onload="getCookie();">
 	<div class="main">
 		<div class="header hide"> OA管理系统  </div>
 		<div class="content">
@@ -96,7 +99,7 @@
 		$("#login")
 				.click(
 						function() {
-
+                           
 							var uname = $("#username");
 							var pwd = $("#password");
 							var display = $("#randiv").css('display');
@@ -121,6 +124,15 @@
 									$('#password_span').css('display','none');
 									$("#userspan").html("");
 									$("#passwordspan").html("");
+									//判断是否选中复选框，如果选中，添加cookie  
+					                var jizhupwd=$("input[type='checkbox']").is(':checked');
+					                console.log("是否记住密码："+jizhupwd);
+					                if(jizhupwd){    
+					                    //添加cookie    
+					                    setCookie();      
+					                }else{    
+					                    clearAllCookie();
+					                }  
 									$
 											.ajax({
 												url : '${baseurl}ajaxLogin',// 跳转到 action  
@@ -181,6 +193,16 @@
 													"<font color='red'>验证码不能为空！</font>");
 									rcode.focus();
 								} else {
+									
+									//判断是否选中复选框，如果选中，添加cookie  
+					                var jizhupwd=$("input[type='checkbox']").is(':checked');
+					                console.log("是否记住密码："+jizhupwd);
+					                if(jizhupwd){    
+					                    //添加cookie    
+					                    setCookie();      
+					                }else{    
+					                    clearAllCookie();
+					                }  
 									$("#userspan").html("");
 									$("#passwordspan").html("");
 									$("#randomcode_span").html("");
@@ -239,6 +261,59 @@
 			$("#randomcode_img").attr('src',
 					'${baseurl}validatecode.jsp?time' + new Date().getTime());
 		}
+		function setCookie(){   
+            var loginCode = $("#username").val(); //获取用户名信息    
+            var pwd = $("#password").val(); //获取登陆密码信息    
+            var checked = $("input[type='checkbox']").is(':checked');//获取“是否记住密码”复选框  
+              //console.log("setCookie方法是否记住密码："+checked);
+            if(checked){ //判断是否选中了“记住密码”复选框    
+                //设置cookie过期时间
+                var date = new Date();
+               date.setTime(date.getTime()+60*1000);//只能这么写，60表示60秒钟
+               //console.log("cookie过期时间："+date);
+               $.cookie("login_code",loginCode,{ expires: date, path: '/' });//调用jquery.cookie.js中的方法设置cookie中的用户名    
+               $.cookie("pwd",$.base64.encode(pwd),{ expires: date, path: '/' });//调用jquery.cookie.js中的方法设置cookie中的登陆密码，并使用base64（jquery.base64.js）进行加密
+            }else{     
+                $.cookie("login_code", null);  
+               $.cookie("pwd", null);     
+            }      
+       } 
+		 //清除所有cookie函数
+        function clearAllCookie() {
+            var date=new Date();
+            date.setTime(date.getTime()-10000);
+            var keys=document.cookie.match(/[^ =;]+(?=\=)/g);
+            console.log("需要删除的cookie名字："+keys);
+            if (keys) {
+                for (var i =  keys.length; i--;)
+                  document.cookie=keys[i]+"=0; expire="+date.toGMTString()+"; path=/";
+            }
+        }
+      //获取cookie    
+        function getCookie(){ 
+    	 
+             var loginCode = $.cookie("login_code"); //获取cookie中的用户名    
+             var pwd =  $.cookie("pwd"); //获取cookie中的登陆密码  
+             console.log("获取cookie:账户："+loginCode);
+             console.log("获取cookie:密码："+pwd);
+             if (!loginCode||loginCode==0) {
+                  console.log("账户："+!loginCode);
+                  //alert("请输出内容！");
+             }else{
+                 $("#username").val(loginCode);   
+             }
+             if(!pwd||pwd==0){
+                 console.log("密码："+!pwd);
+             }else{
+                 //密码存在的话把密码填充到密码文本框    
+                 //console.log("密码解密后："+$.base64.decode(pwd));
+                $("#password").val($.base64.decode(pwd));
+                //密码存在的话把“记住用户名和密码”复选框勾选住    
+                $("[name='remember']").attr("checked","true");
+             }
+                 
+        } 
+
 	</script>
 <!--[if IE 6]>
 <script type="text/javascript" src="js/login/belatedpng.js" ></script>
