@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TechnologyExample {
+public class NoticeExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public TechnologyExample() {
+    public NoticeExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -112,273 +112,273 @@ public class TechnologyExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andTechnologyIdIsNull() {
-            addCriterion("technology_id is null");
+        public Criteria andNoticeIdIsNull() {
+            addCriterion("notice_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdIsNotNull() {
-            addCriterion("technology_id is not null");
+        public Criteria andNoticeIdIsNotNull() {
+            addCriterion("notice_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdEqualTo(String value) {
-            addCriterion("technology_id =", value, "technologyId");
+        public Criteria andNoticeIdEqualTo(String value) {
+            addCriterion("notice_id =", value, "noticeId");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdNotEqualTo(String value) {
-            addCriterion("technology_id <>", value, "technologyId");
+        public Criteria andNoticeIdNotEqualTo(String value) {
+            addCriterion("notice_id <>", value, "noticeId");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdGreaterThan(String value) {
-            addCriterion("technology_id >", value, "technologyId");
+        public Criteria andNoticeIdGreaterThan(String value) {
+            addCriterion("notice_id >", value, "noticeId");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdGreaterThanOrEqualTo(String value) {
-            addCriterion("technology_id >=", value, "technologyId");
+        public Criteria andNoticeIdGreaterThanOrEqualTo(String value) {
+            addCriterion("notice_id >=", value, "noticeId");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdLessThan(String value) {
-            addCriterion("technology_id <", value, "technologyId");
+        public Criteria andNoticeIdLessThan(String value) {
+            addCriterion("notice_id <", value, "noticeId");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdLessThanOrEqualTo(String value) {
-            addCriterion("technology_id <=", value, "technologyId");
+        public Criteria andNoticeIdLessThanOrEqualTo(String value) {
+            addCriterion("notice_id <=", value, "noticeId");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdLike(String value) {
-            addCriterion("technology_id like", value, "technologyId");
+        public Criteria andNoticeIdLike(String value) {
+            addCriterion("notice_id like", value, "noticeId");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdNotLike(String value) {
-            addCriterion("technology_id not like", value, "technologyId");
+        public Criteria andNoticeIdNotLike(String value) {
+            addCriterion("notice_id not like", value, "noticeId");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdIn(List<String> values) {
-            addCriterion("technology_id in", values, "technologyId");
+        public Criteria andNoticeIdIn(List<String> values) {
+            addCriterion("notice_id in", values, "noticeId");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdNotIn(List<String> values) {
-            addCriterion("technology_id not in", values, "technologyId");
+        public Criteria andNoticeIdNotIn(List<String> values) {
+            addCriterion("notice_id not in", values, "noticeId");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdBetween(String value1, String value2) {
-            addCriterion("technology_id between", value1, value2, "technologyId");
+        public Criteria andNoticeIdBetween(String value1, String value2) {
+            addCriterion("notice_id between", value1, value2, "noticeId");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdNotBetween(String value1, String value2) {
-            addCriterion("technology_id not between", value1, value2, "technologyId");
+        public Criteria andNoticeIdNotBetween(String value1, String value2) {
+            addCriterion("notice_id not between", value1, value2, "noticeId");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeIsNull() {
-            addCriterion("technology_type is null");
+        public Criteria andNoticeTypeIsNull() {
+            addCriterion("notice_type is null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeIsNotNull() {
-            addCriterion("technology_type is not null");
+        public Criteria andNoticeTypeIsNotNull() {
+            addCriterion("notice_type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeEqualTo(String value) {
-            addCriterion("technology_type =", value, "technologyType");
+        public Criteria andNoticeTypeEqualTo(String value) {
+            addCriterion("notice_type =", value, "noticeType");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeNotEqualTo(String value) {
-            addCriterion("technology_type <>", value, "technologyType");
+        public Criteria andNoticeTypeNotEqualTo(String value) {
+            addCriterion("notice_type <>", value, "noticeType");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeGreaterThan(String value) {
-            addCriterion("technology_type >", value, "technologyType");
+        public Criteria andNoticeTypeGreaterThan(String value) {
+            addCriterion("notice_type >", value, "noticeType");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeGreaterThanOrEqualTo(String value) {
-            addCriterion("technology_type >=", value, "technologyType");
+        public Criteria andNoticeTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("notice_type >=", value, "noticeType");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeLessThan(String value) {
-            addCriterion("technology_type <", value, "technologyType");
+        public Criteria andNoticeTypeLessThan(String value) {
+            addCriterion("notice_type <", value, "noticeType");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeLessThanOrEqualTo(String value) {
-            addCriterion("technology_type <=", value, "technologyType");
+        public Criteria andNoticeTypeLessThanOrEqualTo(String value) {
+            addCriterion("notice_type <=", value, "noticeType");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeLike(String value) {
-            addCriterion("technology_type like", value, "technologyType");
+        public Criteria andNoticeTypeLike(String value) {
+            addCriterion("notice_type like", value, "noticeType");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeNotLike(String value) {
-            addCriterion("technology_type not like", value, "technologyType");
+        public Criteria andNoticeTypeNotLike(String value) {
+            addCriterion("notice_type not like", value, "noticeType");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeIn(List<String> values) {
-            addCriterion("technology_type in", values, "technologyType");
+        public Criteria andNoticeTypeIn(List<String> values) {
+            addCriterion("notice_type in", values, "noticeType");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeNotIn(List<String> values) {
-            addCriterion("technology_type not in", values, "technologyType");
+        public Criteria andNoticeTypeNotIn(List<String> values) {
+            addCriterion("notice_type not in", values, "noticeType");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeBetween(String value1, String value2) {
-            addCriterion("technology_type between", value1, value2, "technologyType");
+        public Criteria andNoticeTypeBetween(String value1, String value2) {
+            addCriterion("notice_type between", value1, value2, "noticeType");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeNotBetween(String value1, String value2) {
-            addCriterion("technology_type not between", value1, value2, "technologyType");
+        public Criteria andNoticeTypeNotBetween(String value1, String value2) {
+            addCriterion("notice_type not between", value1, value2, "noticeType");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeIsNull() {
-            addCriterion("technology_theme is null");
+        public Criteria andNoticeThemeIsNull() {
+            addCriterion("notice_theme is null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeIsNotNull() {
-            addCriterion("technology_theme is not null");
+        public Criteria andNoticeThemeIsNotNull() {
+            addCriterion("notice_theme is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeEqualTo(String value) {
-            addCriterion("technology_theme =", value, "technologyTheme");
+        public Criteria andNoticeThemeEqualTo(String value) {
+            addCriterion("notice_theme =", value, "noticeTheme");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeNotEqualTo(String value) {
-            addCriterion("technology_theme <>", value, "technologyTheme");
+        public Criteria andNoticeThemeNotEqualTo(String value) {
+            addCriterion("notice_theme <>", value, "noticeTheme");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeGreaterThan(String value) {
-            addCriterion("technology_theme >", value, "technologyTheme");
+        public Criteria andNoticeThemeGreaterThan(String value) {
+            addCriterion("notice_theme >", value, "noticeTheme");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeGreaterThanOrEqualTo(String value) {
-            addCriterion("technology_theme >=", value, "technologyTheme");
+        public Criteria andNoticeThemeGreaterThanOrEqualTo(String value) {
+            addCriterion("notice_theme >=", value, "noticeTheme");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeLessThan(String value) {
-            addCriterion("technology_theme <", value, "technologyTheme");
+        public Criteria andNoticeThemeLessThan(String value) {
+            addCriterion("notice_theme <", value, "noticeTheme");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeLessThanOrEqualTo(String value) {
-            addCriterion("technology_theme <=", value, "technologyTheme");
+        public Criteria andNoticeThemeLessThanOrEqualTo(String value) {
+            addCriterion("notice_theme <=", value, "noticeTheme");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeLike(String value) {
-            addCriterion("technology_theme like", value, "technologyTheme");
+        public Criteria andNoticeThemeLike(String value) {
+            addCriterion("notice_theme like", value, "noticeTheme");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeNotLike(String value) {
-            addCriterion("technology_theme not like", value, "technologyTheme");
+        public Criteria andNoticeThemeNotLike(String value) {
+            addCriterion("notice_theme not like", value, "noticeTheme");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeIn(List<String> values) {
-            addCriterion("technology_theme in", values, "technologyTheme");
+        public Criteria andNoticeThemeIn(List<String> values) {
+            addCriterion("notice_theme in", values, "noticeTheme");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeNotIn(List<String> values) {
-            addCriterion("technology_theme not in", values, "technologyTheme");
+        public Criteria andNoticeThemeNotIn(List<String> values) {
+            addCriterion("notice_theme not in", values, "noticeTheme");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeBetween(String value1, String value2) {
-            addCriterion("technology_theme between", value1, value2, "technologyTheme");
+        public Criteria andNoticeThemeBetween(String value1, String value2) {
+            addCriterion("notice_theme between", value1, value2, "noticeTheme");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeNotBetween(String value1, String value2) {
-            addCriterion("technology_theme not between", value1, value2, "technologyTheme");
+        public Criteria andNoticeThemeNotBetween(String value1, String value2) {
+            addCriterion("notice_theme not between", value1, value2, "noticeTheme");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyDateIsNull() {
-            addCriterion("technology_date is null");
+        public Criteria andNoticeDateIsNull() {
+            addCriterion("notice_date is null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyDateIsNotNull() {
-            addCriterion("technology_date is not null");
+        public Criteria andNoticeDateIsNotNull() {
+            addCriterion("notice_date is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyDateEqualTo(Date value) {
-            addCriterion("technology_date =", value, "technologyDate");
+        public Criteria andNoticeDateEqualTo(Date value) {
+            addCriterion("notice_date =", value, "noticeDate");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyDateNotEqualTo(Date value) {
-            addCriterion("technology_date <>", value, "technologyDate");
+        public Criteria andNoticeDateNotEqualTo(Date value) {
+            addCriterion("notice_date <>", value, "noticeDate");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyDateGreaterThan(Date value) {
-            addCriterion("technology_date >", value, "technologyDate");
+        public Criteria andNoticeDateGreaterThan(Date value) {
+            addCriterion("notice_date >", value, "noticeDate");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyDateGreaterThanOrEqualTo(Date value) {
-            addCriterion("technology_date >=", value, "technologyDate");
+        public Criteria andNoticeDateGreaterThanOrEqualTo(Date value) {
+            addCriterion("notice_date >=", value, "noticeDate");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyDateLessThan(Date value) {
-            addCriterion("technology_date <", value, "technologyDate");
+        public Criteria andNoticeDateLessThan(Date value) {
+            addCriterion("notice_date <", value, "noticeDate");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyDateLessThanOrEqualTo(Date value) {
-            addCriterion("technology_date <=", value, "technologyDate");
+        public Criteria andNoticeDateLessThanOrEqualTo(Date value) {
+            addCriterion("notice_date <=", value, "noticeDate");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyDateIn(List<Date> values) {
-            addCriterion("technology_date in", values, "technologyDate");
+        public Criteria andNoticeDateIn(List<Date> values) {
+            addCriterion("notice_date in", values, "noticeDate");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyDateNotIn(List<Date> values) {
-            addCriterion("technology_date not in", values, "technologyDate");
+        public Criteria andNoticeDateNotIn(List<Date> values) {
+            addCriterion("notice_date not in", values, "noticeDate");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyDateBetween(Date value1, Date value2) {
-            addCriterion("technology_date between", value1, value2, "technologyDate");
+        public Criteria andNoticeDateBetween(Date value1, Date value2) {
+            addCriterion("notice_date between", value1, value2, "noticeDate");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyDateNotBetween(Date value1, Date value2) {
-            addCriterion("technology_date not between", value1, value2, "technologyDate");
+        public Criteria andNoticeDateNotBetween(Date value1, Date value2) {
+            addCriterion("notice_date not between", value1, value2, "noticeDate");
             return (Criteria) this;
         }
 
@@ -452,143 +452,143 @@ public class TechnologyExample {
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteIsNull() {
-            addCriterion("technology_note is null");
+        public Criteria andNoticeNoteIsNull() {
+            addCriterion("notice_note is null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteIsNotNull() {
-            addCriterion("technology_note is not null");
+        public Criteria andNoticeNoteIsNotNull() {
+            addCriterion("notice_note is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteEqualTo(String value) {
-            addCriterion("technology_note =", value, "technologyNote");
+        public Criteria andNoticeNoteEqualTo(String value) {
+            addCriterion("notice_note =", value, "noticeNote");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteNotEqualTo(String value) {
-            addCriterion("technology_note <>", value, "technologyNote");
+        public Criteria andNoticeNoteNotEqualTo(String value) {
+            addCriterion("notice_note <>", value, "noticeNote");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteGreaterThan(String value) {
-            addCriterion("technology_note >", value, "technologyNote");
+        public Criteria andNoticeNoteGreaterThan(String value) {
+            addCriterion("notice_note >", value, "noticeNote");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteGreaterThanOrEqualTo(String value) {
-            addCriterion("technology_note >=", value, "technologyNote");
+        public Criteria andNoticeNoteGreaterThanOrEqualTo(String value) {
+            addCriterion("notice_note >=", value, "noticeNote");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteLessThan(String value) {
-            addCriterion("technology_note <", value, "technologyNote");
+        public Criteria andNoticeNoteLessThan(String value) {
+            addCriterion("notice_note <", value, "noticeNote");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteLessThanOrEqualTo(String value) {
-            addCriterion("technology_note <=", value, "technologyNote");
+        public Criteria andNoticeNoteLessThanOrEqualTo(String value) {
+            addCriterion("notice_note <=", value, "noticeNote");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteLike(String value) {
-            addCriterion("technology_note like", value, "technologyNote");
+        public Criteria andNoticeNoteLike(String value) {
+            addCriterion("notice_note like", value, "noticeNote");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteNotLike(String value) {
-            addCriterion("technology_note not like", value, "technologyNote");
+        public Criteria andNoticeNoteNotLike(String value) {
+            addCriterion("notice_note not like", value, "noticeNote");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteIn(List<String> values) {
-            addCriterion("technology_note in", values, "technologyNote");
+        public Criteria andNoticeNoteIn(List<String> values) {
+            addCriterion("notice_note in", values, "noticeNote");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteNotIn(List<String> values) {
-            addCriterion("technology_note not in", values, "technologyNote");
+        public Criteria andNoticeNoteNotIn(List<String> values) {
+            addCriterion("notice_note not in", values, "noticeNote");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteBetween(String value1, String value2) {
-            addCriterion("technology_note between", value1, value2, "technologyNote");
+        public Criteria andNoticeNoteBetween(String value1, String value2) {
+            addCriterion("notice_note between", value1, value2, "noticeNote");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteNotBetween(String value1, String value2) {
-            addCriterion("technology_note not between", value1, value2, "technologyNote");
+        public Criteria andNoticeNoteNotBetween(String value1, String value2) {
+            addCriterion("notice_note not between", value1, value2, "noticeNote");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileIsNull() {
-            addCriterion("technology_file is null");
+        public Criteria andNoticeFileIsNull() {
+            addCriterion("notice_file is null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileIsNotNull() {
-            addCriterion("technology_file is not null");
+        public Criteria andNoticeFileIsNotNull() {
+            addCriterion("notice_file is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileEqualTo(String value) {
-            addCriterion("technology_file =", value, "technologyFile");
+        public Criteria andNoticeFileEqualTo(String value) {
+            addCriterion("notice_file =", value, "noticeFile");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileNotEqualTo(String value) {
-            addCriterion("technology_file <>", value, "technologyFile");
+        public Criteria andNoticeFileNotEqualTo(String value) {
+            addCriterion("notice_file <>", value, "noticeFile");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileGreaterThan(String value) {
-            addCriterion("technology_file >", value, "technologyFile");
+        public Criteria andNoticeFileGreaterThan(String value) {
+            addCriterion("notice_file >", value, "noticeFile");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileGreaterThanOrEqualTo(String value) {
-            addCriterion("technology_file >=", value, "technologyFile");
+        public Criteria andNoticeFileGreaterThanOrEqualTo(String value) {
+            addCriterion("notice_file >=", value, "noticeFile");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileLessThan(String value) {
-            addCriterion("technology_file <", value, "technologyFile");
+        public Criteria andNoticeFileLessThan(String value) {
+            addCriterion("notice_file <", value, "noticeFile");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileLessThanOrEqualTo(String value) {
-            addCriterion("technology_file <=", value, "technologyFile");
+        public Criteria andNoticeFileLessThanOrEqualTo(String value) {
+            addCriterion("notice_file <=", value, "noticeFile");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileLike(String value) {
-            addCriterion("technology_file like", value, "technologyFile");
+        public Criteria andNoticeFileLike(String value) {
+            addCriterion("notice_file like", value, "noticeFile");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileNotLike(String value) {
-            addCriterion("technology_file not like", value, "technologyFile");
+        public Criteria andNoticeFileNotLike(String value) {
+            addCriterion("notice_file not like", value, "noticeFile");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileIn(List<String> values) {
-            addCriterion("technology_file in", values, "technologyFile");
+        public Criteria andNoticeFileIn(List<String> values) {
+            addCriterion("notice_file in", values, "noticeFile");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileNotIn(List<String> values) {
-            addCriterion("technology_file not in", values, "technologyFile");
+        public Criteria andNoticeFileNotIn(List<String> values) {
+            addCriterion("notice_file not in", values, "noticeFile");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileBetween(String value1, String value2) {
-            addCriterion("technology_file between", value1, value2, "technologyFile");
+        public Criteria andNoticeFileBetween(String value1, String value2) {
+            addCriterion("notice_file between", value1, value2, "noticeFile");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileNotBetween(String value1, String value2) {
-            addCriterion("technology_file not between", value1, value2, "technologyFile");
+        public Criteria andNoticeFileNotBetween(String value1, String value2) {
+            addCriterion("notice_file not between", value1, value2, "noticeFile");
             return (Criteria) this;
         }
     }

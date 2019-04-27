@@ -10,19 +10,19 @@ import com.megagao.production.ssm.domain.COrder;
 
 import com.megagao.production.ssm.domain.COrderExample;
 
-import com.megagao.production.ssm.domain.Report;
+import com.megagao.production.ssm.domain.Plan;
 
-import com.megagao.production.ssm.domain.ReportExample;
+import com.megagao.production.ssm.domain.PlanExample;
 
 import com.megagao.production.ssm.domain.customize.CustomResult;
 
 import com.megagao.production.ssm.domain.vo.COrderVO;
 
-import com.megagao.production.ssm.domain.vo.ReportVO;
+import com.megagao.production.ssm.domain.vo.PlanVO;
 
-import com.megagao.production.ssm.mapper.ReportMapper;
+import com.megagao.production.ssm.mapper.PlanMapper;
 
-import com.megagao.production.ssm.service.ReportService;
+import com.megagao.production.ssm.service.PlanService;
 
 import com.megagao.production.ssm.domain.customize.EUDataGridResult;
 
@@ -40,7 +40,7 @@ import com.github.pagehelper.PageInfo;
 
 @Service
 
-public class ReportServiceImpl implements ReportService {
+public class PlanServiceImpl implements PlanService {
 
 
 
@@ -48,15 +48,15 @@ public class ReportServiceImpl implements ReportService {
 
 	@Autowired
 
-    ReportMapper reportMapper;
+    PlanMapper planMapper;
 
 	@Override
 
-	public List<ReportVO> find() throws Exception{
+	public List<PlanVO> find() throws Exception{
 
-		ReportExample example = new ReportExample();
+		PlanExample example = new PlanExample();
 
-		return reportMapper.selectByExample(example);
+		return planMapper.selectByExample(example);
 
 	}
 
@@ -64,7 +64,7 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 
-	public EUDataGridResult getList(int page, int rows, ReportVO reportVO) throws Exception{
+	public EUDataGridResult getList(int page, int rows, PlanVO planVO) throws Exception{
 
 		
 
@@ -72,7 +72,7 @@ public class ReportServiceImpl implements ReportService {
 
 		PageHelper.startPage(page, rows);
 
-		List<ReportVO> list = reportMapper.find(reportVO);
+		List<PlanVO> list = planMapper.find(planVO);
 
 		//创建一个返回值对象
 
@@ -82,7 +82,7 @@ public class ReportServiceImpl implements ReportService {
 
 		//取记录总条数
 
-		PageInfo<ReportVO> pageInfo = new PageInfo<>(list);
+		PageInfo<PlanVO> pageInfo = new PageInfo<>(list);
 
 		result.setTotal(pageInfo.getTotal());
 
@@ -94,9 +94,9 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 
-	public ReportVO get(String id) throws Exception{
+	public PlanVO get(String id) throws Exception{
 
-		return reportMapper.selectByPrimaryKey(id);
+		return planMapper.selectByPrimaryKey(id);
 
 	}
 
@@ -106,7 +106,7 @@ public class ReportServiceImpl implements ReportService {
 
 	public CustomResult delete(String id) throws Exception{
 
-		int i = reportMapper.deleteByPrimaryKey(id);
+		int i = planMapper.deleteByPrimaryKey(id);
 
 		if(i>0){
 
@@ -126,7 +126,7 @@ public class ReportServiceImpl implements ReportService {
 
 	public CustomResult deleteBatch(String[] ids) throws Exception{
 
-		int i = reportMapper.deleteBatch(ids);
+		int i = planMapper.deleteBatch(ids);
 
 		if(i>0){
 
@@ -144,9 +144,9 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 
-	public CustomResult insert(Report report) throws Exception{
+	public CustomResult insert(Plan plan) throws Exception{
 
-		int i = reportMapper.insert(report);
+		int i = planMapper.insert(plan);
 
 		if(i>0){
 
@@ -164,29 +164,9 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 
-	public CustomResult update(Report report) throws Exception{
+	public CustomResult update(Plan plan) throws Exception{
 
-		int i = reportMapper.updateByPrimaryKeySelective(report);
-
-		if(i>0){
-
-			return CustomResult.ok();
-
-		}else{
-
-			return CustomResult.build(101, "修改订单失败");
-
-		}
-
-	}
-
-
-
-	@Override
-
-	public CustomResult updateAll(Report report) throws Exception{
-
-		int i = reportMapper.updateByPrimaryKey(report);
+		int i = planMapper.updateByPrimaryKeySelective(plan);
 
 		if(i>0){
 
@@ -204,9 +184,29 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 
-	public CustomResult updateReportNote(Report report) throws Exception{
+	public CustomResult updateAll(Plan plan) throws Exception{
 
-		int i = reportMapper.updateReportNote(report);
+		int i = planMapper.updateByPrimaryKey(plan);
+
+		if(i>0){
+
+			return CustomResult.ok();
+
+		}else{
+
+			return CustomResult.build(101, "修改订单失败");
+
+		}
+
+	}
+
+
+
+	@Override
+
+	public CustomResult updatePlanNote(Plan plan) throws Exception{
+
+		int i = planMapper.updatePlanNote(plan);
 
 		if(i>0){
 
@@ -228,13 +228,13 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 
-	public EUDataGridResult searchReportByReportId(int page, int rows, String orderId) throws Exception{
+	public EUDataGridResult searchPlanByPlanId(int page, int rows, String orderId) throws Exception{
 
 		//分页处理
 
 		PageHelper.startPage(page, rows);
 
-		List<ReportVO> list = reportMapper.searchReportByReportId(orderId);
+		List<PlanVO> list = planMapper.searchPlanByPlanId(orderId);
 
 		//创建一个返回值对象
 
@@ -244,7 +244,7 @@ public class ReportServiceImpl implements ReportService {
 
 		//取记录总条数
 
-		PageInfo<ReportVO> pageInfo = new PageInfo<>(list);
+		PageInfo<PlanVO> pageInfo = new PageInfo<>(list);
 
 		result.setTotal(pageInfo.getTotal());
 
@@ -256,7 +256,7 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 
-	public EUDataGridResult searchReportByReportTheme(int page, int rows, String reportName)
+	public EUDataGridResult searchPlanByPlanTheme(int page, int rows, String planName)
 
 			throws Exception{
 
@@ -264,7 +264,7 @@ public class ReportServiceImpl implements ReportService {
 
 		PageHelper.startPage(page, rows);
 
-		List<ReportVO> list = reportMapper.searchReportByReportTheme(reportName);
+		List<PlanVO> list = planMapper.searchPlanByPlanTheme(planName);
 
 		//创建一个返回值对象
 
@@ -274,7 +274,7 @@ public class ReportServiceImpl implements ReportService {
 
 		//取记录总条数
 
-		PageInfo<ReportVO> pageInfo = new PageInfo<>(list);
+		PageInfo<PlanVO> pageInfo = new PageInfo<>(list);
 
 		result.setTotal(pageInfo.getTotal());
 
@@ -286,7 +286,7 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 
-	public EUDataGridResult searchReportByReportType(int page, int rows, String reportType)
+	public EUDataGridResult searchPlanByPlanType(int page, int rows, String planType)
 
 			throws Exception{
 
@@ -294,7 +294,7 @@ public class ReportServiceImpl implements ReportService {
 
 		PageHelper.startPage(page, rows);
 
-		List<ReportVO> list = reportMapper.searchReportByReportType(reportType);
+		List<PlanVO> list = planMapper.searchPlanByPlanType(planType);
 
 		//创建一个返回值对象
 
@@ -304,7 +304,7 @@ public class ReportServiceImpl implements ReportService {
 
 		//取记录总条数
 
-		PageInfo<ReportVO> pageInfo = new PageInfo<>(list);
+		PageInfo<PlanVO> pageInfo = new PageInfo<>(list);
 
 		result.setTotal(pageInfo.getTotal());
 

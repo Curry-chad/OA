@@ -4,38 +4,38 @@
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 
-<table class="easyui-datagrid" id="technologyList" title="技术资料列表" data-options="singleSelect:false,collapsible:true,
-	pagination:true,rownumbers:true,url:'technology/list',method:'get',pageSize:10,fitColumns:true,toolbar:toolbar_technology">
+<table class="easyui-datagrid" id="planList" title="工作计划列表" data-options="singleSelect:false,collapsible:true,
+	pagination:true,rownumbers:true,url:'plan/list',method:'get',pageSize:10,fitColumns:true,toolbar:toolbar_plan">
     <thead>
         <tr>
 			<th data-options="field:'ck',checkbox:true"></th>
-			<th data-options="field:'technologyId',align:'center',width:100">技术资料编号</th>
-			<th data-options="field:'technologyType',align:'center',width:100">技术资料类型</th>
-			<th data-options="field:'technologyTheme',align:'center',width:100">技术资料主题</th>
-			<th data-options="field:'technologyDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">上传日期</th>
+			<th data-options="field:'planId',align:'center',width:100">工作计划编号</th>
+			<th data-options="field:'planType',align:'center',width:100">工作计划类型</th>
+			<th data-options="field:'planTheme',align:'center',width:100">工作计划主题</th>
+			<th data-options="field:'planDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">上传日期</th>
 			<th data-options="field:'employee',width:70,align:'center',formatter:formatEmployee">上传人</th>
-			<th data-options="field:'technologyNote',width:100,align:'center', formatter:formatOrderNote">备注</th>
-			<th data-options="field:'technologyFile',width:180,align:'center', formatter:formatFile">附件</th>
+			<th data-options="field:'planNote',width:100,align:'center', formatter:formatOrderNote">备注</th>
+			<th data-options="field:'planFile',width:180,align:'center', formatter:formatFile">附件</th>
         </tr>
     </thead>
 </table> 
 
-<div  id="toolbar_technology" style=" height: 22px; padding: 3px 11px; background: #fafafa;">  
+<div  id="toolbar_plan" style=" height: 22px; padding: 3px 11px; background: #fafafa;">  
 	
 	<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
 		<c:if test="${per=='order:add' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="technology_add()">新增</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="plan_add()">新增</a>  
 		    </div>  
 		</c:if>
 		<c:if test="${per=='order:edit' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="technology_edit()">编辑</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="plan_edit()">编辑</a>  
 		    </div>  
 		</c:if>
 		<c:if test="${per=='order:delete' }" >
 		    <div style="float: left;">  
-		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="technology_delete()">删除</a>  
+		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="plan_delete()">删除</a>  
 		    </div>  
 		</c:if>
 	</c:forEach>
@@ -43,7 +43,7 @@
 	<div class="datagrid-btn-separator"></div>  
 	
 	<div style="float: left;">  
-		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-reload" onclick="technology_reload()">刷新</a>  
+		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-reload" onclick="plan_reload()">刷新</a>  
 	</div>  
 	
     <div id="search_order" style="float: right;">
@@ -52,66 +52,66 @@
             style="width:250px;vertical-align: middle;">
         </input>
         <div id="menu_order" style="width:120px"> 
-			<div data-options="name:'technologyId'">技术资料编号</div> 
-			<div data-options="name:'technologyType'">技术资料类型</div>
-			<div data-options="name:'technologyTheme'">技术资料主题</div> 
+			<div data-options="name:'planId'">工作计划编号</div> 
+			<div data-options="name:'planType'">工作计划类型</div>
+			<div data-options="name:'planTheme'">工作计划主题</div> 
 		</div>     
     </div>  
 </div>  
-<div id="technologyEditWindow" class="easyui-window" title="编辑技术资料" data-options="modal:true,closed:true,resizable:true,
-	iconCls:'icon-save',href:'technology/edit'" style="width:65%;height:80%;padding:10px;">
+<div id="planEditWindow" class="easyui-window" title="编辑工作计划" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save',href:'plan/edit'" style="width:65%;height:80%;padding:10px;">
 </div>
-<div id="technologyAddWindow" class="easyui-window" title="添加技术资料" data-options="modal:true,closed:true,resizable:true,
-	iconCls:'icon-save',href:'technology/add'" style="width:65%;height:80%;padding:10px;">
+<div id="planAddWindow" class="easyui-window" title="添加工作计划" data-options="modal:true,closed:true,resizable:true,
+	iconCls:'icon-save',href:'plan/add'" style="width:65%;height:80%;padding:10px;">
 </div>
-<div id="technologyNoteDialog" class="easyui-dialog" title="技术资料备注" data-options="modal:true,closed:true,resizable:true,
+<div id="planNoteDialog" class="easyui-dialog" title="工作计划备注" data-options="modal:true,closed:true,resizable:true,
 		iconCls:'icon-save'" style="width:55%;height:65%;padding:10px">
-	<form id="technologyNoteForm" class="itemForm" method="post">
-		<input type="hidden" name="technologyId"/>
+	<form id="planNoteForm" class="itemForm" method="post">
+		<input type="hidden" name="planId"/>
 	    <table cellpadding="5" >
 	        <tr>
 	            <td>备注:</td>
-	            <td><textarea style="width:800px;height:450px;visibility:hidden;" name="technologyNote"></textarea></td>
+	            <td><textarea style="width:800px;height:450px;visibility:hidden;" name="planNote"></textarea></td>
 	        </tr>
 	    </table>
 	</form>
 	<div style="padding:5px">
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="updateTechnologyNote()">保存</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="updatePlanNote()">保存</a>
 	</div>
 </div>
 <script>
 function doSearch_order(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
 		
-		$("#technologyList").datagrid({
-	        title:'技术资料列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
-			nowrap:true, toolbar:"toolbar_technology", url:'technology/list', method:'get', loadMsg:'数据加载中......',
+		$("#planList").datagrid({
+	        title:'工作计划列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_plan", url:'plan/list', method:'get', loadMsg:'数据加载中......',
 			fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
 				{field : 'ck', checkbox:true },
-				{field : 'technologyId', width : 100, align:'center', title : '技术资料编号'},
-				{field : 'technologyType', width : 100, align : 'center', title : '技术资料类型'},
-				{field : 'technologyTheme', width : 100, align : 'center', title : '技术资料主题'},
-				{field : 'technologyDate', width : 130, title : '上传日期', align:'center', formatter:TAOTAO.formatDateTime},
+				{field : 'planId', width : 100, align:'center', title : '工作计划编号'},
+				{field : 'planType', width : 100, align : 'center', title : '工作计划类型'},
+				{field : 'planTheme', width : 100, align : 'center', title : '工作计划主题'},
+				{field : 'planDate', width : 130, title : '上传日期', align:'center', formatter:TAOTAO.formatDateTime},
 				{field : 'employee', width : 70, align : 'center', title : '上传人',formatter:formatEmployee},
-				{field : 'technologyNote', width : 100, title : '技术资料备注', align:'center', formatter:formatOrderNote},
-				{field : 'technologyFile', width : 180, title : '附件', align:'center', formatter:formatFile}
+				{field : 'planNote', width : 100, title : '工作计划备注', align:'center', formatter:formatOrderNote},
+				{field : 'planFile', width : 180, title : '附件', align:'center', formatter:formatFile}
 	        ] ],  
 	    });
 	}else{
-		$("#technologyList").datagrid({  
-	        title:'技术资料列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
-			nowrap:true, toolbar:"toolbar_technology", url:'technology/search_technology_by_'+name+'?searchValue='+encodeURI(encodeURI(value)),
+		$("#planList").datagrid({  
+	        title:'工作计划列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+			nowrap:true, toolbar:"toolbar_plan", url:'plan/search_plan_by_'+name+'?searchValue='+encodeURI(encodeURI(value)),
 			loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'technologyId', width : 100, align:'center', title : '技术资料编号'},
-					{field : 'technologyType', width : 100, align : 'center', title : '技术资料类型'},
-					{field : 'technologyTheme', width : 100, align : 'center', title : '技术资料主题'},
-					{field : 'technologyDate', width : 130, title : '上传日期', align:'center', formatter:TAOTAO.formatDateTime},
+	             	{field : 'planId', width : 100, align:'center', title : '工作计划编号'},
+					{field : 'planType', width : 100, align : 'center', title : '工作计划类型'},
+					{field : 'planTheme', width : 100, align : 'center', title : '工作计划主题'},
+					{field : 'planDate', width : 130, title : '上传日期', align:'center', formatter:TAOTAO.formatDateTime},
 					{field : 'employee', width : 70, align : 'center', title : '上传人',formatter:formatEmployee},
-					{field : 'technologyNote', width : 100, title : '技术资料备注', align:'center', formatter:formatOrderNote},
-					{field : 'technologyFile', width : 180, title : '附件', align:'center', formatter:formatFile}
+					{field : 'planNote', width : 100, title : '工作计划备注', align:'center', formatter:formatOrderNote},
+					{field : 'planFile', width : 180, title : '附件', align:'center', formatter:formatFile}
 	        ] ],  
 	    });
 	}
@@ -142,18 +142,18 @@ function doSearch_order(value,name){ //用户输入用户名,点击搜素,触发
 		}
 	};
 	
-	//格式化技术资料要求
+	//格式化工作计划要求
 	function formatOrderNote(value, row, index){ 
 		if(value !=null && value != ''){
-			return "<a href=javascript:openTechnologyNote("+index+")>"+"技术资料备注"+"</a>";
+			return "<a href=javascript:openPlanNote("+index+")>"+"工作计划备注"+"</a>";
 		}else{
 			return "无";
 		}
 	}
 
 	//根据index拿到该行值
-	function onTechnologyClickRow(index) {
-		var rows = $('#technologyList').datagrid('getRows');
+	function onPlanClickRow(index) {
+		var rows = $('#planList').datagrid('getRows');
 		return rows[index];
 		
 	}
@@ -175,7 +175,7 @@ function doSearch_order(value,name){ //用户输入用户名,点击搜素,触发
     				if(data.status == 200){
     					$.messager.alert('提示','修改客户成功!','info',function(){
     						$("#orderCustomInfo").dialog("close");
-    						$("#technologyList").datagrid("reload");
+    						$("#planList").datagrid("reload");
     					});
     				}else{
     					$.messager.alert('提示',data.msg);
@@ -208,7 +208,7 @@ function doSearch_order(value,name){ //用户输入用户名,点击搜素,触发
     				if(data.status == 200){
     					$.messager.alert('提示','修改产品成功!','info',function(){
     						$("#orderProductInfo").dialog("close");
-    						$("#technologyList").datagrid("reload");
+    						$("#planList").datagrid("reload");
     					});
     				}else{
     					$.messager.alert('提示',data.msg);
@@ -218,38 +218,38 @@ function doSearch_order(value,name){ //用户输入用户名,点击搜素,触发
     	});
 	}
 	
-	//打开技术资料要求富文本编辑器对话框
-	function  openTechnologyNote(index){ 
-		var row = onTechnologyClickRow(index);
-		$("#technologyNoteDialog").dialog({
+	//打开工作计划要求富文本编辑器对话框
+	function  openPlanNote(index){ 
+		var row = onPlanClickRow(index);
+		$("#planNoteDialog").dialog({
     		onOpen :function(){
-    			$("#technologyNoteForm [name=technologyId]").val(row.technologyId);
-    			orderNoteEditor = TAOTAO.createEditor("#technologyNoteForm [name=technologyNote]");
-    			orderNoteEditor.html(row.technologyNote);
+    			$("#planNoteForm [name=planId]").val(row.planId);
+    			orderNoteEditor = TAOTAO.createEditor("#planNoteForm [name=planNote]");
+    			orderNoteEditor.html(row.planNote);
     		},
 		
 			onBeforeClose: function (event, ui) {
 				// 关闭Dialog前移除编辑器
-			   	KindEditor.remove("#technologyNoteForm [name=technologyNote]");
+			   	KindEditor.remove("#planNoteForm [name=planNote]");
 			}
     	}).dialog("open");
 		
 	};
 	
-	//更新技术资料要求
-	function updateTechnologyNote(){
+	//更新工作计划要求
+	function updatePlanNote(){
 		$.get("order/edit_judge",'',function(data){
     		if(data.msg != null){
     			$.messager.alert('提示', data.msg);
     		}else{
     			orderNoteEditor.sync();
-    			$.post("order/update_note",$("#technologyNoteForm").serialize(), function(data){
+    			$.post("order/update_note",$("#planNoteForm").serialize(), function(data){
     				if(data.status == 200){
-    					$("#technologyNoteDialog").dialog("close");
-    					$("#technologyList").datagrid("reload");
-    					$.messager.alert("操作提示", "更新技术资料备注成功！");
+    					$("#planNoteDialog").dialog("close");
+    					$("#planList").datagrid("reload");
+    					$.messager.alert("操作提示", "更新工作计划备注成功！");
     				}else{
-    					$.messager.alert("操作提示", "更新技术资料备注失败！");
+    					$.messager.alert("操作提示", "更新工作计划备注失败！");
     				}
     			});
     		}
@@ -257,28 +257,28 @@ function doSearch_order(value,name){ //用户输入用户名,点击搜素,触发
 	}
 	
     function getOrderSelectionsIds(){
-    	var technologyList = $("#technologyList");
-    	var sels = technologyList.datagrid("getSelections");
+    	var planList = $("#planList");
+    	var sels = planList.datagrid("getSelections");
     	var ids = [];
     	for(var i in sels){
-    		ids.push(sels[i].technologyId);
+    		ids.push(sels[i].planId);
     	}
     	ids = ids.join(","); 
     	
     	return ids;
     }
     
-    function technology_add(){
+    function plan_add(){
     	$.get("order/add_judge",'',function(data){
        		if(data.msg != null){
        			$.messager.alert('提示', data.msg);
        		}else{
-       			$("#technologyAddWindow").window("open");
+       			$("#planAddWindow").window("open");
        		}
        	});
     }
     
-    function technology_edit(){
+    function plan_edit(){
     	$.get("order/edit_judge",'',function(data){
        		if(data.msg != null){
        			$.messager.alert('提示', data.msg);
@@ -286,21 +286,21 @@ function doSearch_order(value,name){ //用户输入用户名,点击搜素,触发
        			var ids = getOrderSelectionsIds();
                	
                	if(ids.length == 0){
-               		$.messager.alert('提示','必须选择一个技术资料才能编辑!');
+               		$.messager.alert('提示','必须选择一个工作计划才能编辑!');
                		return ;
                	}
                	if(ids.indexOf(',') > 0){
-               		$.messager.alert('提示','只能选择一个技术资料!');
+               		$.messager.alert('提示','只能选择一个工作计划!');
                		return ;
                	}
                	
-               	$("#technologyEditWindow").window({
+               	$("#planEditWindow").window({
                		onLoad :function(){
                			//回显数据
-               			var data = $("#technologyList").datagrid("getSelections")[0];
-               			data.technologyDate = TAOTAO.formatDateTime(data.technologyDate);
-               			$("#technologyEditForm").form("load", data);
-               			orderEditEditor.html(data.technologyNote);
+               			var data = $("#planList").datagrid("getSelections")[0];
+               			data.planDate = TAOTAO.formatDateTime(data.planDate);
+               			$("#planEditForm").form("load", data);
+               			orderEditEditor.html(data.planNote);
                			
                		
                			
@@ -314,23 +314,23 @@ function doSearch_order(value,name){ //用户输入用户名,点击搜素,触发
        	});
     }
     
-    function technology_delete(){
+    function plan_delete(){
     	$.get("order/delete_judge",'',function(data){
       		if(data.msg != null){
       			$.messager.alert('提示', data.msg);
       		}else{
       			var ids = getOrderSelectionsIds();
               	if(ids.length == 0){
-              		$.messager.alert('提示','未选中技术资料!');
+              		$.messager.alert('提示','未选中工作计划!');
               		return ;
               	}
-              	$.messager.confirm('确认','确定删除ID为 '+ids+' 的技术资料吗？',function(r){
+              	$.messager.confirm('确认','确定删除ID为 '+ids+' 的工作计划吗？',function(r){
               	    if (r){
               	    	var params = {"ids":ids};
-                      	$.post("technology/delete_batch",params, function(data){
+                      	$.post("plan/delete_batch",params, function(data){
                   			if(data.status == 200){
-                  				$.messager.alert('提示','删除技术资料成功!',undefined,function(){
-                  					$("#technologyList").datagrid("reload");
+                  				$.messager.alert('提示','删除工作计划成功!',undefined,function(){
+                  					$("#planList").datagrid("reload");
                   				});
                   			}
                   		});
@@ -340,7 +340,7 @@ function doSearch_order(value,name){ //用户输入用户名,点击搜素,触发
       	});
     }
     
-    function technology_reload(){
-    	$("#technologyList").datagrid("reload");
+    function plan_reload(){
+    	$("#planList").datagrid("reload");
     }
 </script>

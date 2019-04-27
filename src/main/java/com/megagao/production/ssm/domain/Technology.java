@@ -1,38 +1,28 @@
 package com.megagao.production.ssm.domain;
 
-import java.math.BigDecimal;
+import java.util.Date;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Size;
-
+/**
+ * 
+ * 
+ * @author wcyong
+ * 
+ * @date 2019-04-27
+ */
 public class Technology {
-	
-	@Size(max=40, message="{id.length.error}")
     private String technologyId;
 
-	@Size(max=100, message="{name.length.error}")
-    private String technologyName;
+    private String technologyType;
 
-	@Max(value=999999999, message="外协价格不能超过999999999")
-    private BigDecimal price;
+    private String technologyTheme;
 
-	@Size(max=10, message="瓶颈工序工期的长度限制在10个字符之内")
-    private String vitalProcessPeriod;
+    private Date technologyDate;
 
-	@Max(value=999999999, message="标准加工能力不能超过999999999")
-    private Integer standardCapacity;
+    private String empId;
 
-	@Max(value=999999999, message="加班标准加工能力不能超过999999999")
-    private Integer overtimeStandardCapacity;
+    private String technologyNote;
 
-	@Max(value=999999999, message="加班超额加工能力不能超过999999999")
-    private Integer overtimeOverfulfilCapacity;
-
-	@Max(value=999999999, message="二倍工序能力不能超过999999999")
-    private Integer doubleCapacity;
-
-	@Max(value=999999999, message="超负荷工序能力不能超过999999999")
-    private Integer overfulfilCapacity;
+    private String technologyFile;
 
     public String getTechnologyId() {
         return technologyId;
@@ -42,67 +32,51 @@ public class Technology {
         this.technologyId = technologyId == null ? null : technologyId.trim();
     }
 
-    public String getTechnologyName() {
-        return technologyName;
+    public String getTechnologyType() {
+        return technologyType;
     }
 
-    public void setTechnologyName(String technologyName) {
-        this.technologyName = technologyName == null ? null : technologyName.trim();
+    public void setTechnologyType(String technologyType) {
+        this.technologyType = technologyType == null ? null : technologyType.trim();
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public String getTechnologyTheme() {
+        return technologyTheme;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setTechnologyTheme(String technologyTheme) {
+        this.technologyTheme = technologyTheme == null ? null : technologyTheme.trim();
     }
 
-    public String getVitalProcessPeriod() {
-        return vitalProcessPeriod;
+    public Date getTechnologyDate() {
+        return technologyDate;
     }
 
-    public void setVitalProcessPeriod(String vitalProcessPeriod) {
-        this.vitalProcessPeriod = vitalProcessPeriod == null ? null : vitalProcessPeriod.trim();
+    public void setTechnologyDate(Date technologyDate) {
+        this.technologyDate = technologyDate;
     }
 
-    public Integer getStandardCapacity() {
-        return standardCapacity;
+    public String getEmpId() {
+        return empId;
     }
 
-    public void setStandardCapacity(Integer standardCapacity) {
-        this.standardCapacity = standardCapacity;
+    public void setEmpId(String empId) {
+        this.empId = empId == null ? null : empId.trim();
     }
 
-    public Integer getOvertimeStandardCapacity() {
-        return overtimeStandardCapacity;
+    public String getTechnologyNote() {
+        return technologyNote;
     }
 
-    public void setOvertimeStandardCapacity(Integer overtimeStandardCapacity) {
-        this.overtimeStandardCapacity = overtimeStandardCapacity;
+    public void setTechnologyNote(String technologyNote) {
+        this.technologyNote = technologyNote == null ? null : technologyNote.trim();
     }
 
-    public Integer getOvertimeOverfulfilCapacity() {
-        return overtimeOverfulfilCapacity;
+    public String getTechnologyFile() {
+        return technologyFile;
     }
 
-    public void setOvertimeOverfulfilCapacity(Integer overtimeOverfulfilCapacity) {
-        this.overtimeOverfulfilCapacity = overtimeOverfulfilCapacity;
-    }
-
-    public Integer getDoubleCapacity() {
-        return doubleCapacity;
-    }
-
-    public void setDoubleCapacity(Integer doubleCapacity) {
-        this.doubleCapacity = doubleCapacity;
-    }
-
-    public Integer getOverfulfilCapacity() {
-        return overfulfilCapacity;
-    }
-
-    public void setOverfulfilCapacity(Integer overfulfilCapacity) {
-        this.overfulfilCapacity = overfulfilCapacity;
+    public void setTechnologyFile(String technologyFile) {
+        this.technologyFile = technologyFile == null ? null : technologyFile.trim();
     }
 }

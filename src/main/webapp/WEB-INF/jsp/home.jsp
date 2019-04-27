@@ -73,16 +73,16 @@
 						<li id=12 data-options="attributes:{'url':'report/find'}">报表管理</li>
 					</ul>
 					<ul>
-						<li id=13 data-options="attributes:{'url':'product/find'}">技术资料管理</li>
+						<li id=13 data-options="attributes:{'url':'technology/find'}">技术资料管理</li>
 					</ul>
 					<ul>
-						<li id=14 data-options="attributes:{'url':'work/find'}">通知文件管理</li>
+						<li id=14 data-options="attributes:{'url':'notice/find'}">通知文件管理</li>
 					</ul>
 					<ul>
-						<li id=15 data-options="attributes:{'url':'manufacture/find'}">工作计划管理</li>
+						<li id=15 data-options="attributes:{'url':'plan/find'}">工作计划管理</li>
 					</ul>
 					<ul>
-						<li id=16 data-options="attributes:{'url':'task/find'}">公告栏</li>
+						<li id=16 data-options="attributes:{'url':'announcement/find'}">公告栏</li>
 					</ul>
 				</li>
 			</ul>

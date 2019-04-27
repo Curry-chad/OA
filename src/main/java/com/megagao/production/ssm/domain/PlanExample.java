@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TechnologyExample {
+public class PlanExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public TechnologyExample() {
+    public PlanExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -112,273 +112,273 @@ public class TechnologyExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andTechnologyIdIsNull() {
-            addCriterion("technology_id is null");
+        public Criteria andPlanIdIsNull() {
+            addCriterion("plan_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdIsNotNull() {
-            addCriterion("technology_id is not null");
+        public Criteria andPlanIdIsNotNull() {
+            addCriterion("plan_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdEqualTo(String value) {
-            addCriterion("technology_id =", value, "technologyId");
+        public Criteria andPlanIdEqualTo(String value) {
+            addCriterion("plan_id =", value, "planId");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdNotEqualTo(String value) {
-            addCriterion("technology_id <>", value, "technologyId");
+        public Criteria andPlanIdNotEqualTo(String value) {
+            addCriterion("plan_id <>", value, "planId");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdGreaterThan(String value) {
-            addCriterion("technology_id >", value, "technologyId");
+        public Criteria andPlanIdGreaterThan(String value) {
+            addCriterion("plan_id >", value, "planId");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdGreaterThanOrEqualTo(String value) {
-            addCriterion("technology_id >=", value, "technologyId");
+        public Criteria andPlanIdGreaterThanOrEqualTo(String value) {
+            addCriterion("plan_id >=", value, "planId");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdLessThan(String value) {
-            addCriterion("technology_id <", value, "technologyId");
+        public Criteria andPlanIdLessThan(String value) {
+            addCriterion("plan_id <", value, "planId");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdLessThanOrEqualTo(String value) {
-            addCriterion("technology_id <=", value, "technologyId");
+        public Criteria andPlanIdLessThanOrEqualTo(String value) {
+            addCriterion("plan_id <=", value, "planId");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdLike(String value) {
-            addCriterion("technology_id like", value, "technologyId");
+        public Criteria andPlanIdLike(String value) {
+            addCriterion("plan_id like", value, "planId");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdNotLike(String value) {
-            addCriterion("technology_id not like", value, "technologyId");
+        public Criteria andPlanIdNotLike(String value) {
+            addCriterion("plan_id not like", value, "planId");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdIn(List<String> values) {
-            addCriterion("technology_id in", values, "technologyId");
+        public Criteria andPlanIdIn(List<String> values) {
+            addCriterion("plan_id in", values, "planId");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdNotIn(List<String> values) {
-            addCriterion("technology_id not in", values, "technologyId");
+        public Criteria andPlanIdNotIn(List<String> values) {
+            addCriterion("plan_id not in", values, "planId");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdBetween(String value1, String value2) {
-            addCriterion("technology_id between", value1, value2, "technologyId");
+        public Criteria andPlanIdBetween(String value1, String value2) {
+            addCriterion("plan_id between", value1, value2, "planId");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyIdNotBetween(String value1, String value2) {
-            addCriterion("technology_id not between", value1, value2, "technologyId");
+        public Criteria andPlanIdNotBetween(String value1, String value2) {
+            addCriterion("plan_id not between", value1, value2, "planId");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeIsNull() {
-            addCriterion("technology_type is null");
+        public Criteria andPlanTypeIsNull() {
+            addCriterion("plan_type is null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeIsNotNull() {
-            addCriterion("technology_type is not null");
+        public Criteria andPlanTypeIsNotNull() {
+            addCriterion("plan_type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeEqualTo(String value) {
-            addCriterion("technology_type =", value, "technologyType");
+        public Criteria andPlanTypeEqualTo(String value) {
+            addCriterion("plan_type =", value, "planType");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeNotEqualTo(String value) {
-            addCriterion("technology_type <>", value, "technologyType");
+        public Criteria andPlanTypeNotEqualTo(String value) {
+            addCriterion("plan_type <>", value, "planType");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeGreaterThan(String value) {
-            addCriterion("technology_type >", value, "technologyType");
+        public Criteria andPlanTypeGreaterThan(String value) {
+            addCriterion("plan_type >", value, "planType");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeGreaterThanOrEqualTo(String value) {
-            addCriterion("technology_type >=", value, "technologyType");
+        public Criteria andPlanTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("plan_type >=", value, "planType");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeLessThan(String value) {
-            addCriterion("technology_type <", value, "technologyType");
+        public Criteria andPlanTypeLessThan(String value) {
+            addCriterion("plan_type <", value, "planType");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeLessThanOrEqualTo(String value) {
-            addCriterion("technology_type <=", value, "technologyType");
+        public Criteria andPlanTypeLessThanOrEqualTo(String value) {
+            addCriterion("plan_type <=", value, "planType");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeLike(String value) {
-            addCriterion("technology_type like", value, "technologyType");
+        public Criteria andPlanTypeLike(String value) {
+            addCriterion("plan_type like", value, "planType");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeNotLike(String value) {
-            addCriterion("technology_type not like", value, "technologyType");
+        public Criteria andPlanTypeNotLike(String value) {
+            addCriterion("plan_type not like", value, "planType");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeIn(List<String> values) {
-            addCriterion("technology_type in", values, "technologyType");
+        public Criteria andPlanTypeIn(List<String> values) {
+            addCriterion("plan_type in", values, "planType");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeNotIn(List<String> values) {
-            addCriterion("technology_type not in", values, "technologyType");
+        public Criteria andPlanTypeNotIn(List<String> values) {
+            addCriterion("plan_type not in", values, "planType");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeBetween(String value1, String value2) {
-            addCriterion("technology_type between", value1, value2, "technologyType");
+        public Criteria andPlanTypeBetween(String value1, String value2) {
+            addCriterion("plan_type between", value1, value2, "planType");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTypeNotBetween(String value1, String value2) {
-            addCriterion("technology_type not between", value1, value2, "technologyType");
+        public Criteria andPlanTypeNotBetween(String value1, String value2) {
+            addCriterion("plan_type not between", value1, value2, "planType");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeIsNull() {
-            addCriterion("technology_theme is null");
+        public Criteria andPlanThemeIsNull() {
+            addCriterion("plan_theme is null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeIsNotNull() {
-            addCriterion("technology_theme is not null");
+        public Criteria andPlanThemeIsNotNull() {
+            addCriterion("plan_theme is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeEqualTo(String value) {
-            addCriterion("technology_theme =", value, "technologyTheme");
+        public Criteria andPlanThemeEqualTo(String value) {
+            addCriterion("plan_theme =", value, "planTheme");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeNotEqualTo(String value) {
-            addCriterion("technology_theme <>", value, "technologyTheme");
+        public Criteria andPlanThemeNotEqualTo(String value) {
+            addCriterion("plan_theme <>", value, "planTheme");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeGreaterThan(String value) {
-            addCriterion("technology_theme >", value, "technologyTheme");
+        public Criteria andPlanThemeGreaterThan(String value) {
+            addCriterion("plan_theme >", value, "planTheme");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeGreaterThanOrEqualTo(String value) {
-            addCriterion("technology_theme >=", value, "technologyTheme");
+        public Criteria andPlanThemeGreaterThanOrEqualTo(String value) {
+            addCriterion("plan_theme >=", value, "planTheme");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeLessThan(String value) {
-            addCriterion("technology_theme <", value, "technologyTheme");
+        public Criteria andPlanThemeLessThan(String value) {
+            addCriterion("plan_theme <", value, "planTheme");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeLessThanOrEqualTo(String value) {
-            addCriterion("technology_theme <=", value, "technologyTheme");
+        public Criteria andPlanThemeLessThanOrEqualTo(String value) {
+            addCriterion("plan_theme <=", value, "planTheme");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeLike(String value) {
-            addCriterion("technology_theme like", value, "technologyTheme");
+        public Criteria andPlanThemeLike(String value) {
+            addCriterion("plan_theme like", value, "planTheme");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeNotLike(String value) {
-            addCriterion("technology_theme not like", value, "technologyTheme");
+        public Criteria andPlanThemeNotLike(String value) {
+            addCriterion("plan_theme not like", value, "planTheme");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeIn(List<String> values) {
-            addCriterion("technology_theme in", values, "technologyTheme");
+        public Criteria andPlanThemeIn(List<String> values) {
+            addCriterion("plan_theme in", values, "planTheme");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeNotIn(List<String> values) {
-            addCriterion("technology_theme not in", values, "technologyTheme");
+        public Criteria andPlanThemeNotIn(List<String> values) {
+            addCriterion("plan_theme not in", values, "planTheme");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeBetween(String value1, String value2) {
-            addCriterion("technology_theme between", value1, value2, "technologyTheme");
+        public Criteria andPlanThemeBetween(String value1, String value2) {
+            addCriterion("plan_theme between", value1, value2, "planTheme");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyThemeNotBetween(String value1, String value2) {
-            addCriterion("technology_theme not between", value1, value2, "technologyTheme");
+        public Criteria andPlanThemeNotBetween(String value1, String value2) {
+            addCriterion("plan_theme not between", value1, value2, "planTheme");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyDateIsNull() {
-            addCriterion("technology_date is null");
+        public Criteria andPlanDateIsNull() {
+            addCriterion("plan_date is null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyDateIsNotNull() {
-            addCriterion("technology_date is not null");
+        public Criteria andPlanDateIsNotNull() {
+            addCriterion("plan_date is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyDateEqualTo(Date value) {
-            addCriterion("technology_date =", value, "technologyDate");
+        public Criteria andPlanDateEqualTo(Date value) {
+            addCriterion("plan_date =", value, "planDate");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyDateNotEqualTo(Date value) {
-            addCriterion("technology_date <>", value, "technologyDate");
+        public Criteria andPlanDateNotEqualTo(Date value) {
+            addCriterion("plan_date <>", value, "planDate");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyDateGreaterThan(Date value) {
-            addCriterion("technology_date >", value, "technologyDate");
+        public Criteria andPlanDateGreaterThan(Date value) {
+            addCriterion("plan_date >", value, "planDate");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyDateGreaterThanOrEqualTo(Date value) {
-            addCriterion("technology_date >=", value, "technologyDate");
+        public Criteria andPlanDateGreaterThanOrEqualTo(Date value) {
+            addCriterion("plan_date >=", value, "planDate");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyDateLessThan(Date value) {
-            addCriterion("technology_date <", value, "technologyDate");
+        public Criteria andPlanDateLessThan(Date value) {
+            addCriterion("plan_date <", value, "planDate");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyDateLessThanOrEqualTo(Date value) {
-            addCriterion("technology_date <=", value, "technologyDate");
+        public Criteria andPlanDateLessThanOrEqualTo(Date value) {
+            addCriterion("plan_date <=", value, "planDate");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyDateIn(List<Date> values) {
-            addCriterion("technology_date in", values, "technologyDate");
+        public Criteria andPlanDateIn(List<Date> values) {
+            addCriterion("plan_date in", values, "planDate");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyDateNotIn(List<Date> values) {
-            addCriterion("technology_date not in", values, "technologyDate");
+        public Criteria andPlanDateNotIn(List<Date> values) {
+            addCriterion("plan_date not in", values, "planDate");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyDateBetween(Date value1, Date value2) {
-            addCriterion("technology_date between", value1, value2, "technologyDate");
+        public Criteria andPlanDateBetween(Date value1, Date value2) {
+            addCriterion("plan_date between", value1, value2, "planDate");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyDateNotBetween(Date value1, Date value2) {
-            addCriterion("technology_date not between", value1, value2, "technologyDate");
+        public Criteria andPlanDateNotBetween(Date value1, Date value2) {
+            addCriterion("plan_date not between", value1, value2, "planDate");
             return (Criteria) this;
         }
 
@@ -452,143 +452,143 @@ public class TechnologyExample {
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteIsNull() {
-            addCriterion("technology_note is null");
+        public Criteria andPlanNoteIsNull() {
+            addCriterion("plan_note is null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteIsNotNull() {
-            addCriterion("technology_note is not null");
+        public Criteria andPlanNoteIsNotNull() {
+            addCriterion("plan_note is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteEqualTo(String value) {
-            addCriterion("technology_note =", value, "technologyNote");
+        public Criteria andPlanNoteEqualTo(String value) {
+            addCriterion("plan_note =", value, "planNote");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteNotEqualTo(String value) {
-            addCriterion("technology_note <>", value, "technologyNote");
+        public Criteria andPlanNoteNotEqualTo(String value) {
+            addCriterion("plan_note <>", value, "planNote");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteGreaterThan(String value) {
-            addCriterion("technology_note >", value, "technologyNote");
+        public Criteria andPlanNoteGreaterThan(String value) {
+            addCriterion("plan_note >", value, "planNote");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteGreaterThanOrEqualTo(String value) {
-            addCriterion("technology_note >=", value, "technologyNote");
+        public Criteria andPlanNoteGreaterThanOrEqualTo(String value) {
+            addCriterion("plan_note >=", value, "planNote");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteLessThan(String value) {
-            addCriterion("technology_note <", value, "technologyNote");
+        public Criteria andPlanNoteLessThan(String value) {
+            addCriterion("plan_note <", value, "planNote");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteLessThanOrEqualTo(String value) {
-            addCriterion("technology_note <=", value, "technologyNote");
+        public Criteria andPlanNoteLessThanOrEqualTo(String value) {
+            addCriterion("plan_note <=", value, "planNote");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteLike(String value) {
-            addCriterion("technology_note like", value, "technologyNote");
+        public Criteria andPlanNoteLike(String value) {
+            addCriterion("plan_note like", value, "planNote");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteNotLike(String value) {
-            addCriterion("technology_note not like", value, "technologyNote");
+        public Criteria andPlanNoteNotLike(String value) {
+            addCriterion("plan_note not like", value, "planNote");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteIn(List<String> values) {
-            addCriterion("technology_note in", values, "technologyNote");
+        public Criteria andPlanNoteIn(List<String> values) {
+            addCriterion("plan_note in", values, "planNote");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteNotIn(List<String> values) {
-            addCriterion("technology_note not in", values, "technologyNote");
+        public Criteria andPlanNoteNotIn(List<String> values) {
+            addCriterion("plan_note not in", values, "planNote");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteBetween(String value1, String value2) {
-            addCriterion("technology_note between", value1, value2, "technologyNote");
+        public Criteria andPlanNoteBetween(String value1, String value2) {
+            addCriterion("plan_note between", value1, value2, "planNote");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyNoteNotBetween(String value1, String value2) {
-            addCriterion("technology_note not between", value1, value2, "technologyNote");
+        public Criteria andPlanNoteNotBetween(String value1, String value2) {
+            addCriterion("plan_note not between", value1, value2, "planNote");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileIsNull() {
-            addCriterion("technology_file is null");
+        public Criteria andPlanFileIsNull() {
+            addCriterion("plan_file is null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileIsNotNull() {
-            addCriterion("technology_file is not null");
+        public Criteria andPlanFileIsNotNull() {
+            addCriterion("plan_file is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileEqualTo(String value) {
-            addCriterion("technology_file =", value, "technologyFile");
+        public Criteria andPlanFileEqualTo(String value) {
+            addCriterion("plan_file =", value, "planFile");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileNotEqualTo(String value) {
-            addCriterion("technology_file <>", value, "technologyFile");
+        public Criteria andPlanFileNotEqualTo(String value) {
+            addCriterion("plan_file <>", value, "planFile");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileGreaterThan(String value) {
-            addCriterion("technology_file >", value, "technologyFile");
+        public Criteria andPlanFileGreaterThan(String value) {
+            addCriterion("plan_file >", value, "planFile");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileGreaterThanOrEqualTo(String value) {
-            addCriterion("technology_file >=", value, "technologyFile");
+        public Criteria andPlanFileGreaterThanOrEqualTo(String value) {
+            addCriterion("plan_file >=", value, "planFile");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileLessThan(String value) {
-            addCriterion("technology_file <", value, "technologyFile");
+        public Criteria andPlanFileLessThan(String value) {
+            addCriterion("plan_file <", value, "planFile");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileLessThanOrEqualTo(String value) {
-            addCriterion("technology_file <=", value, "technologyFile");
+        public Criteria andPlanFileLessThanOrEqualTo(String value) {
+            addCriterion("plan_file <=", value, "planFile");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileLike(String value) {
-            addCriterion("technology_file like", value, "technologyFile");
+        public Criteria andPlanFileLike(String value) {
+            addCriterion("plan_file like", value, "planFile");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileNotLike(String value) {
-            addCriterion("technology_file not like", value, "technologyFile");
+        public Criteria andPlanFileNotLike(String value) {
+            addCriterion("plan_file not like", value, "planFile");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileIn(List<String> values) {
-            addCriterion("technology_file in", values, "technologyFile");
+        public Criteria andPlanFileIn(List<String> values) {
+            addCriterion("plan_file in", values, "planFile");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileNotIn(List<String> values) {
-            addCriterion("technology_file not in", values, "technologyFile");
+        public Criteria andPlanFileNotIn(List<String> values) {
+            addCriterion("plan_file not in", values, "planFile");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileBetween(String value1, String value2) {
-            addCriterion("technology_file between", value1, value2, "technologyFile");
+        public Criteria andPlanFileBetween(String value1, String value2) {
+            addCriterion("plan_file between", value1, value2, "planFile");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyFileNotBetween(String value1, String value2) {
-            addCriterion("technology_file not between", value1, value2, "technologyFile");
+        public Criteria andPlanFileNotBetween(String value1, String value2) {
+            addCriterion("plan_file not between", value1, value2, "planFile");
             return (Criteria) this;
         }
     }

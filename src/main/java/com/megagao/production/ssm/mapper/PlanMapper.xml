@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.megagao.production.ssm.mapper.TechnologyMapper" >
-  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.vo.TechnologyVO" >
-    <id column="technology_id" property="technologyId" jdbcType="VARCHAR" />
-    <result column="technology_type" property="technologyType" jdbcType="VARCHAR" />
-    <result column="technology_theme" property="technologyTheme" jdbcType="VARCHAR" />
-    <result column="technology_date" property="technologyDate" jdbcType="TIMESTAMP" />
-    <result column="technology_note" property="technologyNote" jdbcType="VARCHAR" />
-    <result column="technology_file" property="technologyFile" jdbcType="VARCHAR" />
+<mapper namespace="com.megagao.production.ssm.mapper.PlanMapper" >
+  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.vo.PlanVO" >
+    <id column="plan_id" property="planId" jdbcType="VARCHAR" />
+    <result column="plan_type" property="planType" jdbcType="VARCHAR" />
+    <result column="plan_theme" property="planTheme" jdbcType="VARCHAR" />
+    <result column="plan_date" property="planDate" jdbcType="TIMESTAMP" />
+    <result column="plan_note" property="planNote" jdbcType="VARCHAR" />
+    <result column="plan_file" property="planFile" jdbcType="VARCHAR" />
     <association property="employee" javaType="employee">
      <id column="emp_id" property="empId" jdbcType="VARCHAR" />
     <result column="emp_name" property="empName" jdbcType="VARCHAR" />
@@ -25,83 +25,83 @@
   </resultMap>
 	<!-- 扩展的sql -->
 	<!-- 查询所有记录 -->
-	<select id="find" parameterType="TechnologyVO" resultMap="BaseResultMap">
+	<select id="find" parameterType="PlanVO" resultMap="BaseResultMap">
 		SELECT
-			technology_id,
-			technology_type,
-			technology_theme,
-			technology_date,
+			plan_id,
+			plan_type,
+			plan_theme,
+			plan_date,
 			emp_id,
-			technology_note,
-			technology_file
+			plan_note,
+			plan_file
 		FROM
-			technology
-		<!-- LEFT JOIN employee ON technology.emp_id = employee.emp_id -->
+			plan
+		<!-- LEFT JOIN employee ON plan.emp_id = employee.emp_id -->
 	</select>
 	
-	<select id="searchTechnologyByTechnologyId" parameterType="string" resultMap="BaseResultMap">
+	<select id="searchPlanByPlanId" parameterType="string" resultMap="BaseResultMap">
 		SELECT
-			technology_id,
-			technology_type,
-			technology_theme,
-			technology_date,
+			plan_id,
+			plan_type,
+			plan_theme,
+			plan_date,
 			emp_id,
-			technology_note,
-			technology_file
+			plan_note,
+			plan_file
 		FROM
-			technology
+			plan
 		WHERE 
-			technology_id like CONCAT('%',#{technologyId},'%' ) 
+			plan_id like CONCAT('%',#{planId},'%' ) 
 	</select>
 	
-	<select id="searchTechnologyByTechnologyType" parameterType="string" resultMap="BaseResultMap">
+	<select id="searchPlanByPlanType" parameterType="string" resultMap="BaseResultMap">
 		SELECT
-			technology_id,
-			technology_type,
-			technology_theme,
-			technology_date,
+			plan_id,
+			plan_type,
+			plan_theme,
+			plan_date,
 			emp_id,
-			technology_note,
-			technology_file
+			plan_note,
+			plan_file
 		FROM
-			technology
+			plan
 		WHERE 
-			technology_type like CONCAT('%',#{technologyType},'%' ) 
+			plan_type like CONCAT('%',#{planType},'%' ) 
 	</select>
 	
-	<select id="searchTechnologyByTechnologyTheme" parameterType="string" resultMap="BaseResultMap">
+	<select id="searchPlanByPlanTheme" parameterType="string" resultMap="BaseResultMap">
 		SELECT
-			technology_id,
-			technology_type,
-			technology_theme,
-			technology_date,
+			plan_id,
+			plan_type,
+			plan_theme,
+			plan_date,
 			emp_id,
-			technology_note,
-			technology_file
+			plan_note,
+			plan_file
 		FROM
-			technology
+			plan
 		WHERE 
-			technology_theme like CONCAT('%',#{technologyTheme},'%' ) 
+			plan_theme like CONCAT('%',#{planTheme},'%' ) 
 	</select>
 	
 	<!-- 批量删除 -->
 	<delete id="deleteBatch">
 		DELETE
 		FROM
-			technology
+			plan
 		WHERE
-			technology_id IN
+			plan_id IN
 		<foreach collection="array" item="id" open="(" close=")" separator=",">
 			#{id}
 		</foreach>
 	</delete>
 	
 	<!-- 修改备注-->
-	<update id="updateTechnologyNote" parameterType="TechnologyVO" >
-		UPDATE technology
-		SET technology_note = #{technologyNote}
+	<update id="updatePlanNote" parameterType="PlanVO" >
+		UPDATE plan
+		SET plan_note = #{planNote}
 		WHERE
-			technology_id = #{technologyId,jdbcType=VARCHAR}
+			plan_id = #{planId,jdbcType=VARCHAR}
 	</update>
 	
 <sql id="Example_Where_Clause" >
@@ -165,18 +165,17 @@
     </sql>
 
     <sql id="Base_Column_List" >
-        technology_id, technology_type, technology_theme, technology_date, emp_id, technology_note, 
-        technology_file
+        plan_id, plan_type, plan_theme, plan_date, emp_id, plan_note, plan_file
     </sql>
 
-    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.TechnologyExample" >
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.PlanExample" >
         select
         <if test="distinct" >
             distinct
         </if>
         'true' as QUERYID,
         <include refid="Base_Column_List" />
-        from technology
+        from plan
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
@@ -188,111 +187,111 @@
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
         select 
         <include refid="Base_Column_List" />
-        from technology
-        where technology_id = #{technologyId,jdbcType=VARCHAR}
+        from plan
+        where plan_id = #{planId,jdbcType=VARCHAR}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-        delete from technology
-        where technology_id = #{technologyId,jdbcType=VARCHAR}
+        delete from plan
+        where plan_id = #{planId,jdbcType=VARCHAR}
     </delete>
 
-    <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.TechnologyExample" >
-        delete from technology
+    <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.PlanExample" >
+        delete from plan
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
     </delete>
 
-    <insert id="insert" parameterType="com.megagao.production.ssm.domain.Technology" >
-        insert into technology (technology_id, technology_type, technology_theme, 
-            technology_date, emp_id, technology_note, 
-            technology_file)
-        values (#{technologyId,jdbcType=VARCHAR}, #{technologyType,jdbcType=VARCHAR}, #{technologyTheme,jdbcType=VARCHAR}, 
-            #{technologyDate,jdbcType=TIMESTAMP}, #{empId,jdbcType=VARCHAR}, #{technologyNote,jdbcType=VARCHAR}, 
-            #{technologyFile,jdbcType=VARCHAR})
+    <insert id="insert" parameterType="com.megagao.production.ssm.domain.Plan" >
+        insert into plan (plan_id, plan_type, plan_theme, 
+            plan_date, emp_id, plan_note, 
+            plan_file)
+        values (#{planId,jdbcType=VARCHAR}, #{planType,jdbcType=VARCHAR}, #{planTheme,jdbcType=VARCHAR}, 
+            #{planDate,jdbcType=TIMESTAMP}, #{empId,jdbcType=VARCHAR}, #{planNote,jdbcType=VARCHAR}, 
+            #{planFile,jdbcType=VARCHAR})
     </insert>
 
-    <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.Technology" >
-        insert into technology
+    <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.Plan" >
+        insert into plan
         <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="technologyId != null" >
-                technology_id,
+            <if test="planId != null" >
+                plan_id,
             </if>
-            <if test="technologyType != null" >
-                technology_type,
+            <if test="planType != null" >
+                plan_type,
             </if>
-            <if test="technologyTheme != null" >
-                technology_theme,
+            <if test="planTheme != null" >
+                plan_theme,
             </if>
-            <if test="technologyDate != null" >
-                technology_date,
+            <if test="planDate != null" >
+                plan_date,
             </if>
             <if test="empId != null" >
                 emp_id,
             </if>
-            <if test="technologyNote != null" >
-                technology_note,
+            <if test="planNote != null" >
+                plan_note,
             </if>
-            <if test="technologyFile != null" >
-                technology_file,
+            <if test="planFile != null" >
+                plan_file,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="technologyId != null" >
-                #{technologyId,jdbcType=VARCHAR},
+            <if test="planId != null" >
+                #{planId,jdbcType=VARCHAR},
             </if>
-            <if test="technologyType != null" >
-                #{technologyType,jdbcType=VARCHAR},
+            <if test="planType != null" >
+                #{planType,jdbcType=VARCHAR},
             </if>
-            <if test="technologyTheme != null" >
-                #{technologyTheme,jdbcType=VARCHAR},
+            <if test="planTheme != null" >
+                #{planTheme,jdbcType=VARCHAR},
             </if>
-            <if test="technologyDate != null" >
-                #{technologyDate,jdbcType=TIMESTAMP},
+            <if test="planDate != null" >
+                #{planDate,jdbcType=TIMESTAMP},
             </if>
             <if test="empId != null" >
                 #{empId,jdbcType=VARCHAR},
             </if>
-            <if test="technologyNote != null" >
-                #{technologyNote,jdbcType=VARCHAR},
+            <if test="planNote != null" >
+                #{planNote,jdbcType=VARCHAR},
             </if>
-            <if test="technologyFile != null" >
-                #{technologyFile,jdbcType=VARCHAR},
+            <if test="planFile != null" >
+                #{planFile,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
 
-    <select id="countByExample" parameterType="com.megagao.production.ssm.domain.TechnologyExample" resultType="java.lang.Integer" >
-        select count(*) from technology
+    <select id="countByExample" parameterType="com.megagao.production.ssm.domain.PlanExample" resultType="java.lang.Integer" >
+        select count(*) from plan
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
     </select>
 
     <update id="updateByExampleSelective" parameterType="map" >
-        update technology
+        update plan
         <set >
-            <if test="record.technologyId != null" >
-                technology_id = #{record.technologyId,jdbcType=VARCHAR},
+            <if test="record.planId != null" >
+                plan_id = #{record.planId,jdbcType=VARCHAR},
             </if>
-            <if test="record.technologyType != null" >
-                technology_type = #{record.technologyType,jdbcType=VARCHAR},
+            <if test="record.planType != null" >
+                plan_type = #{record.planType,jdbcType=VARCHAR},
             </if>
-            <if test="record.technologyTheme != null" >
-                technology_theme = #{record.technologyTheme,jdbcType=VARCHAR},
+            <if test="record.planTheme != null" >
+                plan_theme = #{record.planTheme,jdbcType=VARCHAR},
             </if>
-            <if test="record.technologyDate != null" >
-                technology_date = #{record.technologyDate,jdbcType=TIMESTAMP},
+            <if test="record.planDate != null" >
+                plan_date = #{record.planDate,jdbcType=TIMESTAMP},
             </if>
             <if test="record.empId != null" >
                 emp_id = #{record.empId,jdbcType=VARCHAR},
             </if>
-            <if test="record.technologyNote != null" >
-                technology_note = #{record.technologyNote,jdbcType=VARCHAR},
+            <if test="record.planNote != null" >
+                plan_note = #{record.planNote,jdbcType=VARCHAR},
             </if>
-            <if test="record.technologyFile != null" >
-                technology_file = #{record.technologyFile,jdbcType=VARCHAR},
+            <if test="record.planFile != null" >
+                plan_file = #{record.planFile,jdbcType=VARCHAR},
             </if>
         </set>
         <if test="_parameter != null" >
@@ -301,52 +300,52 @@
     </update>
 
     <update id="updateByExample" parameterType="map" >
-        update technology
-        set technology_id = #{record.technologyId,jdbcType=VARCHAR},
-            technology_type = #{record.technologyType,jdbcType=VARCHAR},
-            technology_theme = #{record.technologyTheme,jdbcType=VARCHAR},
-            technology_date = #{record.technologyDate,jdbcType=TIMESTAMP},
+        update plan
+        set plan_id = #{record.planId,jdbcType=VARCHAR},
+            plan_type = #{record.planType,jdbcType=VARCHAR},
+            plan_theme = #{record.planTheme,jdbcType=VARCHAR},
+            plan_date = #{record.planDate,jdbcType=TIMESTAMP},
             emp_id = #{record.empId,jdbcType=VARCHAR},
-            technology_note = #{record.technologyNote,jdbcType=VARCHAR},
-            technology_file = #{record.technologyFile,jdbcType=VARCHAR}
+            plan_note = #{record.planNote,jdbcType=VARCHAR},
+            plan_file = #{record.planFile,jdbcType=VARCHAR}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
         </if>
     </update>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.Technology" >
-        update technology
+    <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.Plan" >
+        update plan
         <set >
-            <if test="technologyType != null" >
-                technology_type = #{technologyType,jdbcType=VARCHAR},
+            <if test="planType != null" >
+                plan_type = #{planType,jdbcType=VARCHAR},
             </if>
-            <if test="technologyTheme != null" >
-                technology_theme = #{technologyTheme,jdbcType=VARCHAR},
+            <if test="planTheme != null" >
+                plan_theme = #{planTheme,jdbcType=VARCHAR},
             </if>
-            <if test="technologyDate != null" >
-                technology_date = #{technologyDate,jdbcType=TIMESTAMP},
+            <if test="planDate != null" >
+                plan_date = #{planDate,jdbcType=TIMESTAMP},
             </if>
             <if test="empId != null" >
                 emp_id = #{empId,jdbcType=VARCHAR},
             </if>
-            <if test="technologyNote != null" >
-                technology_note = #{technologyNote,jdbcType=VARCHAR},
+            <if test="planNote != null" >
+                plan_note = #{planNote,jdbcType=VARCHAR},
             </if>
-            <if test="technologyFile != null" >
-                technology_file = #{technologyFile,jdbcType=VARCHAR},
+            <if test="planFile != null" >
+                plan_file = #{planFile,jdbcType=VARCHAR},
             </if>
         </set>
-        where technology_id = #{technologyId,jdbcType=VARCHAR}
+        where plan_id = #{planId,jdbcType=VARCHAR}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.Technology" >
-        update technology
-        set technology_type = #{technologyType,jdbcType=VARCHAR},
-            technology_theme = #{technologyTheme,jdbcType=VARCHAR},
-            technology_date = #{technologyDate,jdbcType=TIMESTAMP},
+    <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.Plan" >
+        update plan
+        set plan_type = #{planType,jdbcType=VARCHAR},
+            plan_theme = #{planTheme,jdbcType=VARCHAR},
+            plan_date = #{planDate,jdbcType=TIMESTAMP},
             emp_id = #{empId,jdbcType=VARCHAR},
-            technology_note = #{technologyNote,jdbcType=VARCHAR},
-            technology_file = #{technologyFile,jdbcType=VARCHAR}
-        where technology_id = #{technologyId,jdbcType=VARCHAR}
+            plan_note = #{planNote,jdbcType=VARCHAR},
+            plan_file = #{planFile,jdbcType=VARCHAR}
+        where plan_id = #{planId,jdbcType=VARCHAR}
     </update>
 </mapper>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.megagao.production.ssm.mapper.TechnologyMapper" >
-  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.vo.TechnologyVO" >
-    <id column="technology_id" property="technologyId" jdbcType="VARCHAR" />
-    <result column="technology_type" property="technologyType" jdbcType="VARCHAR" />
-    <result column="technology_theme" property="technologyTheme" jdbcType="VARCHAR" />
-    <result column="technology_date" property="technologyDate" jdbcType="TIMESTAMP" />
-    <result column="technology_note" property="technologyNote" jdbcType="VARCHAR" />
-    <result column="technology_file" property="technologyFile" jdbcType="VARCHAR" />
+<mapper namespace="com.megagao.production.ssm.mapper.NoticeMapper" >
+  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.vo.NoticeVO" >
+    <id column="notice_id" property="noticeId" jdbcType="VARCHAR" />
+    <result column="notice_type" property="noticeType" jdbcType="VARCHAR" />
+    <result column="notice_theme" property="noticeTheme" jdbcType="VARCHAR" />
+    <result column="notice_date" property="noticeDate" jdbcType="TIMESTAMP" />
+    <result column="notice_note" property="noticeNote" jdbcType="VARCHAR" />
+    <result column="notice_file" property="noticeFile" jdbcType="VARCHAR" />
     <association property="employee" javaType="employee">
      <id column="emp_id" property="empId" jdbcType="VARCHAR" />
     <result column="emp_name" property="empName" jdbcType="VARCHAR" />
@@ -25,83 +25,83 @@
   </resultMap>
 	<!-- 扩展的sql -->
 	<!-- 查询所有记录 -->
-	<select id="find" parameterType="TechnologyVO" resultMap="BaseResultMap">
+	<select id="find" parameterType="NoticeVO" resultMap="BaseResultMap">
 		SELECT
-			technology_id,
-			technology_type,
-			technology_theme,
-			technology_date,
+			notice_id,
+			notice_type,
+			notice_theme,
+			notice_date,
 			emp_id,
-			technology_note,
-			technology_file
+			notice_note,
+			notice_file
 		FROM
-			technology
-		<!-- LEFT JOIN employee ON technology.emp_id = employee.emp_id -->
+			notice
+		<!-- LEFT JOIN employee ON notice.emp_id = employee.emp_id -->
 	</select>
 	
-	<select id="searchTechnologyByTechnologyId" parameterType="string" resultMap="BaseResultMap">
+	<select id="searchNoticeByNoticeId" parameterType="string" resultMap="BaseResultMap">
 		SELECT
-			technology_id,
-			technology_type,
-			technology_theme,
-			technology_date,
+			notice_id,
+			notice_type,
+			notice_theme,
+			notice_date,
 			emp_id,
-			technology_note,
-			technology_file
+			notice_note,
+			notice_file
 		FROM
-			technology
+			notice
 		WHERE 
-			technology_id like CONCAT('%',#{technologyId},'%' ) 
+			notice_id like CONCAT('%',#{noticeId},'%' ) 
 	</select>
 	
-	<select id="searchTechnologyByTechnologyType" parameterType="string" resultMap="BaseResultMap">
+	<select id="searchNoticeByNoticeType" parameterType="string" resultMap="BaseResultMap">
 		SELECT
-			technology_id,
-			technology_type,
-			technology_theme,
-			technology_date,
+			notice_id,
+			notice_type,
+			notice_theme,
+			notice_date,
 			emp_id,
-			technology_note,
-			technology_file
+			notice_note,
+			notice_file
 		FROM
-			technology
+			notice
 		WHERE 
-			technology_type like CONCAT('%',#{technologyType},'%' ) 
+			notice_type like CONCAT('%',#{noticeType},'%' ) 
 	</select>
 	
-	<select id="searchTechnologyByTechnologyTheme" parameterType="string" resultMap="BaseResultMap">
+	<select id="searchNoticeByNoticeTheme" parameterType="string" resultMap="BaseResultMap">
 		SELECT
-			technology_id,
-			technology_type,
-			technology_theme,
-			technology_date,
+			notice_id,
+			notice_type,
+			notice_theme,
+			notice_date,
 			emp_id,
-			technology_note,
-			technology_file
+			notice_note,
+			notice_file
 		FROM
-			technology
+			notice
 		WHERE 
-			technology_theme like CONCAT('%',#{technologyTheme},'%' ) 
+			notice_theme like CONCAT('%',#{noticeTheme},'%' ) 
 	</select>
 	
 	<!-- 批量删除 -->
 	<delete id="deleteBatch">
 		DELETE
 		FROM
-			technology
+			notice
 		WHERE
-			technology_id IN
+			notice_id IN
 		<foreach collection="array" item="id" open="(" close=")" separator=",">
 			#{id}
 		</foreach>
 	</delete>
 	
 	<!-- 修改备注-->
-	<update id="updateTechnologyNote" parameterType="TechnologyVO" >
-		UPDATE technology
-		SET technology_note = #{technologyNote}
+	<update id="updateNoticeNote" parameterType="NoticeVO" >
+		UPDATE notice
+		SET notice_note = #{noticeNote}
 		WHERE
-			technology_id = #{technologyId,jdbcType=VARCHAR}
+			notice_id = #{noticeId,jdbcType=VARCHAR}
 	</update>
 	
 <sql id="Example_Where_Clause" >
@@ -165,18 +165,17 @@
     </sql>
 
     <sql id="Base_Column_List" >
-        technology_id, technology_type, technology_theme, technology_date, emp_id, technology_note, 
-        technology_file
+        notice_id, notice_type, notice_theme, notice_date, emp_id, notice_note, notice_file
     </sql>
 
-    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.TechnologyExample" >
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.NoticeExample" >
         select
         <if test="distinct" >
             distinct
         </if>
         'true' as QUERYID,
         <include refid="Base_Column_List" />
-        from technology
+        from notice
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
@@ -188,111 +187,111 @@
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
         select 
         <include refid="Base_Column_List" />
-        from technology
-        where technology_id = #{technologyId,jdbcType=VARCHAR}
+        from notice
+        where notice_id = #{noticeId,jdbcType=VARCHAR}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-        delete from technology
-        where technology_id = #{technologyId,jdbcType=VARCHAR}
+        delete from notice
+        where notice_id = #{noticeId,jdbcType=VARCHAR}
     </delete>
 
-    <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.TechnologyExample" >
-        delete from technology
+    <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.NoticeExample" >
+        delete from notice
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
     </delete>
 
-    <insert id="insert" parameterType="com.megagao.production.ssm.domain.Technology" >
-        insert into technology (technology_id, technology_type, technology_theme, 
-            technology_date, emp_id, technology_note, 
-            technology_file)
-        values (#{technologyId,jdbcType=VARCHAR}, #{technologyType,jdbcType=VARCHAR}, #{technologyTheme,jdbcType=VARCHAR}, 
-            #{technologyDate,jdbcType=TIMESTAMP}, #{empId,jdbcType=VARCHAR}, #{technologyNote,jdbcType=VARCHAR}, 
-            #{technologyFile,jdbcType=VARCHAR})
+    <insert id="insert" parameterType="com.megagao.production.ssm.domain.Notice" >
+        insert into notice (notice_id, notice_type, notice_theme, 
+            notice_date, emp_id, notice_note, 
+            notice_file)
+        values (#{noticeId,jdbcType=VARCHAR}, #{noticeType,jdbcType=VARCHAR}, #{noticeTheme,jdbcType=VARCHAR}, 
+            #{noticeDate,jdbcType=TIMESTAMP}, #{empId,jdbcType=VARCHAR}, #{noticeNote,jdbcType=VARCHAR}, 
+            #{noticeFile,jdbcType=VARCHAR})
     </insert>
 
-    <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.Technology" >
-        insert into technology
+    <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.Notice" >
+        insert into notice
         <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="technologyId != null" >
-                technology_id,
+            <if test="noticeId != null" >
+                notice_id,
             </if>
-            <if test="technologyType != null" >
-                technology_type,
+            <if test="noticeType != null" >
+                notice_type,
             </if>
-            <if test="technologyTheme != null" >
-                technology_theme,
+            <if test="noticeTheme != null" >
+                notice_theme,
             </if>
-            <if test="technologyDate != null" >
-                technology_date,
+            <if test="noticeDate != null" >
+                notice_date,
             </if>
             <if test="empId != null" >
                 emp_id,
             </if>
-            <if test="technologyNote != null" >
-                technology_note,
+            <if test="noticeNote != null" >
+                notice_note,
             </if>
-            <if test="technologyFile != null" >
-                technology_file,
+            <if test="noticeFile != null" >
+                notice_file,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="technologyId != null" >
-                #{technologyId,jdbcType=VARCHAR},
+            <if test="noticeId != null" >
+                #{noticeId,jdbcType=VARCHAR},
             </if>
-            <if test="technologyType != null" >
-                #{technologyType,jdbcType=VARCHAR},
+            <if test="noticeType != null" >
+                #{noticeType,jdbcType=VARCHAR},
             </if>
-            <if test="technologyTheme != null" >
-                #{technologyTheme,jdbcType=VARCHAR},
+            <if test="noticeTheme != null" >
+                #{noticeTheme,jdbcType=VARCHAR},
             </if>
-            <if test="technologyDate != null" >
-                #{technologyDate,jdbcType=TIMESTAMP},
+            <if test="noticeDate != null" >
+                #{noticeDate,jdbcType=TIMESTAMP},
             </if>
             <if test="empId != null" >
                 #{empId,jdbcType=VARCHAR},
             </if>
-            <if test="technologyNote != null" >
-                #{technologyNote,jdbcType=VARCHAR},
+            <if test="noticeNote != null" >
+                #{noticeNote,jdbcType=VARCHAR},
             </if>
-            <if test="technologyFile != null" >
-                #{technologyFile,jdbcType=VARCHAR},
+            <if test="noticeFile != null" >
+                #{noticeFile,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
 
-    <select id="countByExample" parameterType="com.megagao.production.ssm.domain.TechnologyExample" resultType="java.lang.Integer" >
-        select count(*) from technology
+    <select id="countByExample" parameterType="com.megagao.production.ssm.domain.NoticeExample" resultType="java.lang.Integer" >
+        select count(*) from notice
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
     </select>
 
     <update id="updateByExampleSelective" parameterType="map" >
-        update technology
+        update notice
         <set >
-            <if test="record.technologyId != null" >
-                technology_id = #{record.technologyId,jdbcType=VARCHAR},
+            <if test="record.noticeId != null" >
+                notice_id = #{record.noticeId,jdbcType=VARCHAR},
             </if>
-            <if test="record.technologyType != null" >
-                technology_type = #{record.technologyType,jdbcType=VARCHAR},
+            <if test="record.noticeType != null" >
+                notice_type = #{record.noticeType,jdbcType=VARCHAR},
             </if>
-            <if test="record.technologyTheme != null" >
-                technology_theme = #{record.technologyTheme,jdbcType=VARCHAR},
+            <if test="record.noticeTheme != null" >
+                notice_theme = #{record.noticeTheme,jdbcType=VARCHAR},
             </if>
-            <if test="record.technologyDate != null" >
-                technology_date = #{record.technologyDate,jdbcType=TIMESTAMP},
+            <if test="record.noticeDate != null" >
+                notice_date = #{record.noticeDate,jdbcType=TIMESTAMP},
             </if>
             <if test="record.empId != null" >
                 emp_id = #{record.empId,jdbcType=VARCHAR},
             </if>
-            <if test="record.technologyNote != null" >
-                technology_note = #{record.technologyNote,jdbcType=VARCHAR},
+            <if test="record.noticeNote != null" >
+                notice_note = #{record.noticeNote,jdbcType=VARCHAR},
             </if>
-            <if test="record.technologyFile != null" >
-                technology_file = #{record.technologyFile,jdbcType=VARCHAR},
+            <if test="record.noticeFile != null" >
+                notice_file = #{record.noticeFile,jdbcType=VARCHAR},
             </if>
         </set>
         <if test="_parameter != null" >
@@ -301,52 +300,52 @@
     </update>
 
     <update id="updateByExample" parameterType="map" >
-        update technology
-        set technology_id = #{record.technologyId,jdbcType=VARCHAR},
-            technology_type = #{record.technologyType,jdbcType=VARCHAR},
-            technology_theme = #{record.technologyTheme,jdbcType=VARCHAR},
-            technology_date = #{record.technologyDate,jdbcType=TIMESTAMP},
+        update notice
+        set notice_id = #{record.noticeId,jdbcType=VARCHAR},
+            notice_type = #{record.noticeType,jdbcType=VARCHAR},
+            notice_theme = #{record.noticeTheme,jdbcType=VARCHAR},
+            notice_date = #{record.noticeDate,jdbcType=TIMESTAMP},
             emp_id = #{record.empId,jdbcType=VARCHAR},
-            technology_note = #{record.technologyNote,jdbcType=VARCHAR},
-            technology_file = #{record.technologyFile,jdbcType=VARCHAR}
+            notice_note = #{record.noticeNote,jdbcType=VARCHAR},
+            notice_file = #{record.noticeFile,jdbcType=VARCHAR}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
         </if>
     </update>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.Technology" >
-        update technology
+    <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.Notice" >
+        update notice
         <set >
-            <if test="technologyType != null" >
-                technology_type = #{technologyType,jdbcType=VARCHAR},
+            <if test="noticeType != null" >
+                notice_type = #{noticeType,jdbcType=VARCHAR},
             </if>
-            <if test="technologyTheme != null" >
-                technology_theme = #{technologyTheme,jdbcType=VARCHAR},
+            <if test="noticeTheme != null" >
+                notice_theme = #{noticeTheme,jdbcType=VARCHAR},
             </if>
-            <if test="technologyDate != null" >
-                technology_date = #{technologyDate,jdbcType=TIMESTAMP},
+            <if test="noticeDate != null" >
+                notice_date = #{noticeDate,jdbcType=TIMESTAMP},
             </if>
             <if test="empId != null" >
                 emp_id = #{empId,jdbcType=VARCHAR},
             </if>
-            <if test="technologyNote != null" >
-                technology_note = #{technologyNote,jdbcType=VARCHAR},
+            <if test="noticeNote != null" >
+                notice_note = #{noticeNote,jdbcType=VARCHAR},
             </if>
-            <if test="technologyFile != null" >
-                technology_file = #{technologyFile,jdbcType=VARCHAR},
+            <if test="noticeFile != null" >
+                notice_file = #{noticeFile,jdbcType=VARCHAR},
             </if>
         </set>
-        where technology_id = #{technologyId,jdbcType=VARCHAR}
+        where notice_id = #{noticeId,jdbcType=VARCHAR}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.Technology" >
-        update technology
-        set technology_type = #{technologyType,jdbcType=VARCHAR},
-            technology_theme = #{technologyTheme,jdbcType=VARCHAR},
-            technology_date = #{technologyDate,jdbcType=TIMESTAMP},
+    <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.Notice" >
+        update notice
+        set notice_type = #{noticeType,jdbcType=VARCHAR},
+            notice_theme = #{noticeTheme,jdbcType=VARCHAR},
+            notice_date = #{noticeDate,jdbcType=TIMESTAMP},
             emp_id = #{empId,jdbcType=VARCHAR},
-            technology_note = #{technologyNote,jdbcType=VARCHAR},
-            technology_file = #{technologyFile,jdbcType=VARCHAR}
-        where technology_id = #{technologyId,jdbcType=VARCHAR}
+            notice_note = #{noticeNote,jdbcType=VARCHAR},
+            notice_file = #{noticeFile,jdbcType=VARCHAR}
+        where notice_id = #{noticeId,jdbcType=VARCHAR}
     </update>
 </mapper>
