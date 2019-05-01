@@ -92,11 +92,10 @@
 			<ul id="deviceMonitor" class="easyui-tree" data-options="animate:true,lines:true">
 				<li><span>项目管理</span>
 					<ul>
-						<li id=21 data-options="attributes:{'url':'device/deviceList'}">项目总体概况</li>
-						<li id=22 data-options="attributes:{'url':'device/deviceType'}">项目时间管理</li>
-						<li id=23 data-options="attributes:{'url':'device/deviceCheck'}">项目质量管理</li>
-						<li id=24 data-options="attributes:{'url':'device/deviceFault'}">项目成本管理</li>
-						<li id=25 data-options="attributes:{'url':'device/deviceMaintain'}">项目范围管理</li>
+						<li id=21 data-options="attributes:{'url':'projectMain/find'}">项目总体概况</li>
+						<li id=22 data-options="attributes:{'url':'projectTime/find'}">项目时间管理</li>
+						<li id=23 data-options="attributes:{'url':'deviceCheck/find'}">项目质量管理</li>
+						<li id=24 data-options="attributes:{'url':'projectCost/find'}">项目成本管理</li>
 					</ul></li>
 			</ul>
 		</div>
@@ -105,9 +104,9 @@
 			<ul id="technologyMonitor" class="easyui-tree" data-options="animate:true,lines:true">
 				<li><span>论坛管理</span>
 					<ul>
-						<li id=31 data-options="attributes:{'url':'technology/find'}">工作讨论</li>
-						<li id=32 data-options="attributes:{'url':'technologyRequirement/find'}">心声社区</li>
-						<li id=33 data-options="attributes:{'url':'technologyPlan/find'}">寻物启事</li>
+						<li id=31 data-options="attributes:{'url':'forumWork/find'}">工作讨论</li>
+						<li id=32 data-options="attributes:{'url':'wish/find'}">心声社区</li>
+						<li id=33 data-options="attributes:{'url':'found/find'}">寻物启事</li>
 					</ul>
 				</li>
 			</ul>
@@ -131,10 +130,10 @@
 				data-options="animate:true,lines:true">
 				<li><span>工作流</span>
 					<ul>
-						<li id=51 data-options="attributes:{'url':'unqualify/find'}">入职办理</li>
-						<li id=52 data-options="attributes:{'url':'measure/find'}">离职办理</li>
-						<li id=53 data-options="attributes:{'url':'f_count_check/find'}">工时管理</li>
-						<li id=54 data-options="attributes:{'url':'p_measure_check/find'}">休假流程</li>
+						<li id=51 data-options="attributes:{'url':'jobEntry/find'}">入职办理</li>
+						<li id=52 data-options="attributes:{'url':'jobExit/find'}">离职办理</li>
+						<li id=53 data-options="attributes:{'url':'jobHour/find'}">工时管理</li>
+						<li id=54 data-options="attributes:{'url':'workRest/find'}">休假流程</li>
 					</ul>
 				</li>
 			</ul>
@@ -184,7 +183,7 @@
 
 		var allItem = [
 						["文档管理","过程文档管理","报表管理","技术资料管理","通知文件管理","工作计划管理","公告栏"], 
-						["项目管理","项目总体概况","项目时间管理","项目质量管理","项目成本管理","项目范围管理"],
+						["项目管理","项目总体概况","项目时间管理","项目质量管理","项目成本管理"],
 						["论坛管理","工作交流","心声社区","寻物启事"],
 						["邮件管理","收件箱","发件箱","查询邮件"],
 						["工作流","入职办理","离职办理","工时管理","休假管理"],

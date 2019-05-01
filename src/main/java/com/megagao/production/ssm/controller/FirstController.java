@@ -55,7 +55,7 @@ public class FirstController {
 				sysPermissionList.add(permissionList.get(i).getPercode());
 			}
 		}
-		model.addAttribute(ACTIVE_USER, activeUser);
+   		model.addAttribute(ACTIVE_USER, activeUser);
 		session.setAttribute("sysPermissionList", sysPermissionList);
 		
 		return "home";

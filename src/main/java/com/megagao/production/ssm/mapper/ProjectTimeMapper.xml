@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.megagao.production.ssm.mapper.ProjectTimeMapper" >
+  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.vo.ProjectTimeVO" >
+    <id column="time_id" property="timeId" jdbcType="VARCHAR" />
+    <result column="time_start" property="timeStart" jdbcType="TIMESTAMP" />
+    <result column="time_end" property="timeEnd" jdbcType="TIMESTAMP" />
+    <association property="projectMain" javaType="ProjectMain">
+     <id column="main_id" property="mainId" jdbcType="VARCHAR" />
+    <result column="main_name" property="mainName" jdbcType="VARCHAR" />
+    <result column="main_start" property="mainStart" jdbcType="TIMESTAMP" />
+    <result column="main_end" property="mainEnd" jdbcType="TIMESTAMP" />
+    <result column="main_amount" property="mainAmount" jdbcType="DOUBLE" />
+    </association>
+  </resultMap>
+	<!-- 扩展的sql -->
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="ProjectTimeVO" resultMap="BaseResultMap">
+		SELECT
+			time_id,
+			main_id,
+			time_start,
+			time_end
+		FROM
+			project_time
+		<!-- LEFT JOIN employee ON project_time.emp_id = employee.emp_id -->
+	</select>
+	
+	<select id="searchProjectTimeByProjectTimeId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			time_id,
+			main_id,
+			time_start,
+			time_end
+		FROM
+			project_time
+		WHERE 
+			time_id like CONCAT('%',#{timeId},'%' ) 
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			project_time
+		WHERE
+			time_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	
+<sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        time_id, main_id, time_start, time_end
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.ProjectTimeExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List" />
+        from project_time
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from project_time
+        where time_id = #{timeId,jdbcType=CHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from project_time
+        where time_id = #{timeId,jdbcType=CHAR}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.ProjectTimeExample" >
+        delete from project_time
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.megagao.production.ssm.domain.ProjectTime" >
+        insert into project_time (time_id, main_id, time_start, 
+            time_end)
+        values (#{timeId,jdbcType=CHAR}, #{mainId,jdbcType=VARCHAR}, #{timeStart,jdbcType=TIMESTAMP}, 
+            #{timeEnd,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.ProjectTime" >
+        insert into project_time
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="timeId != null" >
+                time_id,
+            </if>
+            <if test="mainId != null" >
+                main_id,
+            </if>
+            <if test="timeStart != null" >
+                time_start,
+            </if>
+            <if test="timeEnd != null" >
+                time_end,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="timeId != null" >
+                #{timeId,jdbcType=CHAR},
+            </if>
+            <if test="mainId != null" >
+                #{mainId,jdbcType=VARCHAR},
+            </if>
+            <if test="timeStart != null" >
+                #{timeStart,jdbcType=TIMESTAMP},
+            </if>
+            <if test="timeEnd != null" >
+                #{timeEnd,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.megagao.production.ssm.domain.ProjectTimeExample" resultType="java.lang.Integer" >
+        select count(*) from project_time
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update project_time
+        <set >
+            <if test="record.timeId != null" >
+                time_id = #{record.timeId,jdbcType=CHAR},
+            </if>
+            <if test="record.mainId != null" >
+                main_id = #{record.mainId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.timeStart != null" >
+                time_start = #{record.timeStart,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.timeEnd != null" >
+                time_end = #{record.timeEnd,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update project_time
+        set time_id = #{record.timeId,jdbcType=CHAR},
+            main_id = #{record.mainId,jdbcType=VARCHAR},
+            time_start = #{record.timeStart,jdbcType=TIMESTAMP},
+            time_end = #{record.timeEnd,jdbcType=TIMESTAMP}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.ProjectTime" >
+        update project_time
+        <set >
+            <if test="mainId != null" >
+                main_id = #{mainId,jdbcType=VARCHAR},
+            </if>
+            <if test="timeStart != null" >
+                time_start = #{timeStart,jdbcType=TIMESTAMP},
+            </if>
+            <if test="timeEnd != null" >
+                time_end = #{timeEnd,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where time_id = #{timeId,jdbcType=CHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.ProjectTime" >
+        update project_time
+        set main_id = #{mainId,jdbcType=VARCHAR},
+            time_start = #{timeStart,jdbcType=TIMESTAMP},
+            time_end = #{timeEnd,jdbcType=TIMESTAMP}
+        where time_id = #{timeId,jdbcType=CHAR}
+    </update>
+    </mapper>

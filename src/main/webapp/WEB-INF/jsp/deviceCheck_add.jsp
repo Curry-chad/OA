@@ -12,7 +12,7 @@
 	            </td>
 	        </tr>
 	        <tr>
-	            <td>设备名称:</td>
+	            <td>项目名称:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="deviceId" panelHeight="auto" value="001"
     					data-options="editable:false,valueField:'deviceId',textField:'deviceName',
@@ -35,7 +35,7 @@
 	            </td>
 	        </tr>
 	        <tr>
-	            <td>例检故障编号:</td>
+	            <td>例检问题编号:</td>
 	            <td>
 	            	<input class="easyui-textbox" name="deviceCheckFaultId"></input>
 	            </td>
@@ -79,7 +79,7 @@
 		console.log($("#deviceCheckAddEmp").serialize());
 		$.post("deviceCheck/insert",$("#deviceCheckAddEmp").serialize(), function(data){
 			if(data.status == 200){
-				$.messager.alert('提示','新增设备例检信息成功!');
+				$.messager.alert('提示','新增项目例检信息成功!');
 				clearForm_deviceCheck();
 				$("#deviceCheckAddWindow").window("close");
 				$("#deviceCheck").datagrid("reload");

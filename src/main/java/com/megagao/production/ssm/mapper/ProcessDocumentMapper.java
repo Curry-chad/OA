@@ -6,7 +6,6 @@ import com.megagao.production.ssm.domain.ProcessDocument;
 import com.megagao.production.ssm.domain.ProcessDocumentExample;
 import org.apache.ibatis.annotations.Param;
 
-import com.megagao.production.ssm.domain.vo.COrderVO;
 import com.megagao.production.ssm.domain.vo.ProcessDocumentVO;
 
 public interface ProcessDocumentMapper {

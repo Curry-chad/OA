@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.megagao.production.ssm.mapper.JobExitMapper" >
+  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.vo.JobExitVO" >
+    <id column="exit_id" property="exitId" jdbcType="VARCHAR" />
+    <result column="exit_post" property="exitPost" jdbcType="VARCHAR" />
+    <result column="exit_salary" property="exitSalary" jdbcType="DOUBLE" />
+    <result column="exit_date" property="exitDate" jdbcType="TIMESTAMP" />
+    <association property="employee" javaType="employee">
+     <id column="emp_id" property="empId" jdbcType="VARCHAR" />
+    <result column="emp_name" property="empName" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="CHAR" />
+    <result column="id_code" property="idCode" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="join_date" property="joinDate" jdbcType="DATE" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="degree" property="degree" jdbcType="VARCHAR" />
+    <result column="major" property="major" jdbcType="VARCHAR" />
+    <result column="graduate_school" property="graduateSchool" jdbcType="VARCHAR" />
+    <result column="education_form" property="educationForm" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+	<!-- 扩展的sql -->
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="JobExitVO" resultMap="BaseResultMap">
+		SELECT
+			exit_id,
+			exit_post,
+			exit_salary,
+			exit_date,
+			emp_id
+		FROM
+			job_exit
+		<!-- LEFT JOIN employee ON job_exit.emp_id = employee.emp_id -->
+	</select>
+	
+	<select id="searchJobExitByJobExitId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			exit_id,
+			exit_post,
+			exit_salary,
+			exit_date,
+			emp_id
+		FROM
+			job_exit
+		WHERE 
+			exit_id like CONCAT('%',#{exitId},'%' ) 
+	</select>
+	
+	<select id="searchJobExitByJobExitSalary" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			exit_id,
+			exit_post,
+			exit_salary,
+			exit_date,
+			emp_id
+		FROM
+			job_exit
+		WHERE 
+			exit_salary like CONCAT('%',#{exitSalary},'%' ) 
+	</select>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			job_exit
+		WHERE
+			exit_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	
+<sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        exit_id, emp_id, exit_post, exit_salary, exit_date
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.JobExitExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List" />
+        from job_exit
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from job_exit
+        where exit_id = #{exitId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from job_exit
+        where exit_id = #{exitId,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.JobExitExample" >
+        delete from job_exit
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.megagao.production.ssm.domain.JobExit" >
+        insert into job_exit (exit_id, emp_id, exit_post, 
+            exit_salary, exit_date)
+        values (#{exitId,jdbcType=VARCHAR}, #{empId,jdbcType=VARCHAR}, #{exitPost,jdbcType=VARCHAR}, 
+            #{exitSalary,jdbcType=DOUBLE}, #{exitDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.JobExit" >
+        insert into job_exit
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="exitId != null" >
+                exit_id,
+            </if>
+            <if test="empId != null" >
+                emp_id,
+            </if>
+            <if test="exitPost != null" >
+                exit_post,
+            </if>
+            <if test="exitSalary != null" >
+                exit_salary,
+            </if>
+            <if test="exitDate != null" >
+                exit_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="exitId != null" >
+                #{exitId,jdbcType=VARCHAR},
+            </if>
+            <if test="empId != null" >
+                #{empId,jdbcType=VARCHAR},
+            </if>
+            <if test="exitPost != null" >
+                #{exitPost,jdbcType=VARCHAR},
+            </if>
+            <if test="exitSalary != null" >
+                #{exitSalary,jdbcType=DOUBLE},
+            </if>
+            <if test="exitDate != null" >
+                #{exitDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.megagao.production.ssm.domain.JobExitExample" resultType="java.lang.Integer" >
+        select count(*) from job_exit
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update job_exit
+        <set >
+            <if test="record.exitId != null" >
+                exit_id = #{record.exitId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.empId != null" >
+                emp_id = #{record.empId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.exitPost != null" >
+                exit_post = #{record.exitPost,jdbcType=VARCHAR},
+            </if>
+            <if test="record.exitSalary != null" >
+                exit_salary = #{record.exitSalary,jdbcType=DOUBLE},
+            </if>
+            <if test="record.exitDate != null" >
+                exit_date = #{record.exitDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update job_exit
+        set exit_id = #{record.exitId,jdbcType=VARCHAR},
+            emp_id = #{record.empId,jdbcType=VARCHAR},
+            exit_post = #{record.exitPost,jdbcType=VARCHAR},
+            exit_salary = #{record.exitSalary,jdbcType=DOUBLE},
+            exit_date = #{record.exitDate,jdbcType=TIMESTAMP}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.JobExit" >
+        update job_exit
+        <set >
+            <if test="empId != null" >
+                emp_id = #{empId,jdbcType=VARCHAR},
+            </if>
+            <if test="exitPost != null" >
+                exit_post = #{exitPost,jdbcType=VARCHAR},
+            </if>
+            <if test="exitSalary != null" >
+                exit_salary = #{exitSalary,jdbcType=DOUBLE},
+            </if>
+            <if test="exitDate != null" >
+                exit_date = #{exitDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where exit_id = #{exitId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.JobExit" >
+        update job_exit
+        set emp_id = #{empId,jdbcType=VARCHAR},
+            exit_post = #{exitPost,jdbcType=VARCHAR},
+            exit_salary = #{exitSalary,jdbcType=DOUBLE},
+            exit_date = #{exitDate,jdbcType=TIMESTAMP}
+        where exit_id = #{exitId,jdbcType=VARCHAR}
+    </update>
+</mapper>

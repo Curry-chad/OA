@@ -8,7 +8,7 @@
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 
-<div style="padding:10px 10px 10px 10px">
+<div style="padding:10px 10px 10px 10px"> 
 	<form id="orderAddForm" class="orderForm" method="post">
 	    <table cellpadding="5" >
 	        <tr>

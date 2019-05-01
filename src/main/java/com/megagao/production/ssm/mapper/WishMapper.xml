@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.megagao.production.ssm.mapper.WishMapper" >
+  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.vo.WishVO" >
+    <id column="wish_id" property="wishId" jdbcType="VARCHAR" />
+    <result column="wish_text" property="wishText" jdbcType="VARCHAR" />
+    <result column="wish_date" property="wishDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+	<!-- 扩展的sql -->
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="WishVO" resultMap="BaseResultMap">
+		SELECT
+			wish_id,
+			wish_text,
+			wish_date
+		FROM
+			wish
+		<!-- LEFT JOIN employee ON wish.emp_id = employee.emp_id -->
+	</select>
+	
+	<select id="searchWishByWishId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			wish_id,
+			wish_text,
+			wish_date
+		FROM
+			wish
+		WHERE 
+			wish_id like CONCAT('%',#{wishId},'%' ) 
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			wish
+		WHERE
+			wish_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<!-- 修改备注-->
+	<update id="updateWishText" parameterType="WishVO" >
+		UPDATE wish
+		SET wish_text = #{wish_text}
+		WHERE
+			wish_id = #{wishId,jdbcType=VARCHAR}
+	</update>
+	
+<sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        wish_id, wish_text, wish_date
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.WishExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List" />
+        from wish
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from wish
+        where wish_id = #{wishId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from wish
+        where wish_id = #{wishId,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.WishExample" >
+        delete from wish
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.megagao.production.ssm.domain.Wish" >
+        insert into wish (wish_id, wish_text, wish_date
+            )
+        values (#{wishId,jdbcType=VARCHAR}, #{wishText,jdbcType=VARCHAR}, #{wishDate,jdbcType=DATE}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.Wish" >
+        insert into wish
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="wishId != null" >
+                wish_id,
+            </if>
+            <if test="wishText != null" >
+                wish_text,
+            </if>
+            <if test="wishDate != null" >
+                wish_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="wishId != null" >
+                #{wishId,jdbcType=VARCHAR},
+            </if>
+            <if test="wishText != null" >
+                #{wishText,jdbcType=VARCHAR},
+            </if>
+            <if test="wishDate != null" >
+                #{wishDate,jdbcType=DATE},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.megagao.production.ssm.domain.WishExample" resultType="java.lang.Integer" >
+        select count(*) from wish
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update wish
+        <set >
+            <if test="record.wishId != null" >
+                wish_id = #{record.wishId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.wishText != null" >
+                wish_text = #{record.wishText,jdbcType=VARCHAR},
+            </if>
+            <if test="record.wishDate != null" >
+                wish_date = #{record.wishDate,jdbcType=DATE},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update wish
+        set wish_id = #{record.wishId,jdbcType=VARCHAR},
+            wish_text = #{record.wishText,jdbcType=VARCHAR},
+            wish_date = #{record.wishDate,jdbcType=DATE}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.Wish" >
+        update wish
+        <set >
+            <if test="wishText != null" >
+                wish_text = #{wishText,jdbcType=VARCHAR},
+            </if>
+            <if test="wishDate != null" >
+                wish_date = #{wishDate,jdbcType=DATE},
+            </if>
+        </set>
+        where wish_id = #{wishId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.Wish" >
+        update wish
+        set wish_text = #{wishText,jdbcType=VARCHAR},
+            wish_date = #{wishDate,jdbcType=DATE}
+        where wish_id = #{wishId,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

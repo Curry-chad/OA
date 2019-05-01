@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.megagao.production.ssm.mapper.JobEntryMapper" >
+  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.vo.JobEntryVO" >
+    <id column="entry_id" property="entryId" jdbcType="VARCHAR" />
+    <result column="entry_post" property="entryPost" jdbcType="VARCHAR" />
+    <result column="entry_salary" property="entrySalary" jdbcType="DOUBLE" />
+    <result column="entry_date" property="entryDate" jdbcType="TIMESTAMP" />
+    <association property="employee" javaType="employee">
+     <id column="emp_id" property="empId" jdbcType="VARCHAR" />
+    <result column="emp_name" property="empName" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="CHAR" />
+    <result column="id_code" property="idCode" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="join_date" property="joinDate" jdbcType="DATE" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="degree" property="degree" jdbcType="VARCHAR" />
+    <result column="major" property="major" jdbcType="VARCHAR" />
+    <result column="graduate_school" property="graduateSchool" jdbcType="VARCHAR" />
+    <result column="education_form" property="educationForm" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+	<!-- 扩展的sql -->
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="JobEntryVO" resultMap="BaseResultMap">
+		SELECT
+			entry_id,
+			entry_post,
+			entry_salary,
+			entry_date,
+			emp_id
+		FROM
+			job_entry
+		<!-- LEFT JOIN employee ON job_entry.emp_id = employee.emp_id -->
+	</select>
+	
+	<select id="searchJobEntryByJobEntryId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			entry_id,
+			entry_post,
+			entry_salary,
+			entry_date,
+			emp_id
+		FROM
+			job_entry
+		WHERE 
+			entry_id like CONCAT('%',#{entryId},'%' ) 
+	</select>
+	
+	<select id="searchJobEntryByJobEntrySalary" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			entry_id,
+			entry_post,
+			entry_salary,
+			entry_date,
+			emp_id
+		FROM
+			job_entry
+		WHERE 
+			entry_salary like CONCAT('%',#{entrySalary},'%' ) 
+	</select>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			job_entry
+		WHERE
+			entry_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	
+<sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        entry_id, emp_id, entry_post, entry_salary, entry_date
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.JobEntryExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List" />
+        from job_entry
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from job_entry
+        where entry_id = #{entryId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from job_entry
+        where entry_id = #{entryId,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.JobEntryExample" >
+        delete from job_entry
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.megagao.production.ssm.domain.JobEntry" >
+        insert into job_entry (entry_id, emp_id, entry_post, 
+            entry_salary, entry_date)
+        values (#{entryId,jdbcType=VARCHAR}, #{empId,jdbcType=VARCHAR}, #{entryPost,jdbcType=VARCHAR}, 
+            #{entrySalary,jdbcType=DOUBLE}, #{entryDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.JobEntry" >
+        insert into job_entry
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="entryId != null" >
+                entry_id,
+            </if>
+            <if test="empId != null" >
+                emp_id,
+            </if>
+            <if test="entryPost != null" >
+                entry_post,
+            </if>
+            <if test="entrySalary != null" >
+                entry_salary,
+            </if>
+            <if test="entryDate != null" >
+                entry_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="entryId != null" >
+                #{entryId,jdbcType=VARCHAR},
+            </if>
+            <if test="empId != null" >
+                #{empId,jdbcType=VARCHAR},
+            </if>
+            <if test="entryPost != null" >
+                #{entryPost,jdbcType=VARCHAR},
+            </if>
+            <if test="entrySalary != null" >
+                #{entrySalary,jdbcType=DOUBLE},
+            </if>
+            <if test="entryDate != null" >
+                #{entryDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.megagao.production.ssm.domain.JobEntryExample" resultType="java.lang.Integer" >
+        select count(*) from job_entry
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update job_entry
+        <set >
+            <if test="record.entryId != null" >
+                entry_id = #{record.entryId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.empId != null" >
+                emp_id = #{record.empId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.entryPost != null" >
+                entry_post = #{record.entryPost,jdbcType=VARCHAR},
+            </if>
+            <if test="record.entrySalary != null" >
+                entry_salary = #{record.entrySalary,jdbcType=DOUBLE},
+            </if>
+            <if test="record.entryDate != null" >
+                entry_date = #{record.entryDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update job_entry
+        set entry_id = #{record.entryId,jdbcType=VARCHAR},
+            emp_id = #{record.empId,jdbcType=VARCHAR},
+            entry_post = #{record.entryPost,jdbcType=VARCHAR},
+            entry_salary = #{record.entrySalary,jdbcType=DOUBLE},
+            entry_date = #{record.entryDate,jdbcType=TIMESTAMP}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.JobEntry" >
+        update job_entry
+        <set >
+            <if test="empId != null" >
+                emp_id = #{empId,jdbcType=VARCHAR},
+            </if>
+            <if test="entryPost != null" >
+                entry_post = #{entryPost,jdbcType=VARCHAR},
+            </if>
+            <if test="entrySalary != null" >
+                entry_salary = #{entrySalary,jdbcType=DOUBLE},
+            </if>
+            <if test="entryDate != null" >
+                entry_date = #{entryDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where entry_id = #{entryId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.JobEntry" >
+        update job_entry
+        set emp_id = #{empId,jdbcType=VARCHAR},
+            entry_post = #{entryPost,jdbcType=VARCHAR},
+            entry_salary = #{entrySalary,jdbcType=DOUBLE},
+            entry_date = #{entryDate,jdbcType=TIMESTAMP}
+        where entry_id = #{entryId,jdbcType=VARCHAR}
+    </update>
+</mapper>

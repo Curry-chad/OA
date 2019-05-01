@@ -4,7 +4,6 @@ import java.util.List;
 import com.megagao.production.ssm.domain.Notice;
 import com.megagao.production.ssm.domain.NoticeExample;
 import com.megagao.production.ssm.domain.customize.CustomResult;
-import com.megagao.production.ssm.domain.vo.COrderVO;
 import com.megagao.production.ssm.domain.vo.NoticeVO;
 import com.megagao.production.ssm.mapper.NoticeMapper;
 import com.megagao.production.ssm.service.NoticeService;

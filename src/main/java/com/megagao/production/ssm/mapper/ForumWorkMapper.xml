@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.megagao.production.ssm.mapper.ForumWorkMapper" >
+  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.vo.ForumWorkVO" >
+    <id column="work_id" property="workId" jdbcType="VARCHAR" />
+    <result column="work_text" property="workText" jdbcType="VARCHAR" />
+    <result column="work_date" property="workDate" jdbcType="TIMESTAMP" />
+    <association property="employee" javaType="employee">
+     <id column="emp_id" property="empId" jdbcType="VARCHAR" />
+    <result column="emp_name" property="empName" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="CHAR" />
+    <result column="id_code" property="idCode" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="join_date" property="joinDate" jdbcType="DATE" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="degree" property="degree" jdbcType="VARCHAR" />
+    <result column="major" property="major" jdbcType="VARCHAR" />
+    <result column="graduate_school" property="graduateSchool" jdbcType="VARCHAR" />
+    <result column="education_form" property="educationForm" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+	<!-- 扩展的sql -->
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="ForumWorkVO" resultMap="BaseResultMap">
+		SELECT
+			work_id,
+			work_text,
+			work_date,
+			emp_id
+		FROM
+			forum_work
+		<!-- LEFT JOIN employee ON forum_work.emp_id = employee.emp_id -->
+	</select>
+	
+	<select id="searchForumWorkByForumWorkId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			work_id,
+			work_text,
+			work_date,
+			emp_id
+		FROM
+			forum_work
+		WHERE 
+			work_id like CONCAT('%',#{workId},'%' ) 
+	</select>
+	
+	<select id="searchForumWorkByForumWorkText" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			work_id,
+			work_text,
+			work_date,
+			emp_id
+		FROM
+			forum_work
+		WHERE 
+			work_text like CONCAT('%',#{workText},'%' ) 
+	</select>
+
+	
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			forum_work
+		WHERE
+			work_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<!-- 修改备注-->
+	<update id="updateForumWorkText" parameterType="ForumWorkVO" >
+		UPDATE forum_work
+		SET work_text = #{workText}
+		WHERE
+			work_id = #{workId,jdbcType=VARCHAR}
+	</update>
+	
+<sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        work_id, emp_id, work_text, work_date
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.ForumWorkExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List" />
+        from forum_work
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from forum_work
+        where work_id = #{workId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from forum_work
+        where work_id = #{workId,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.ForumWorkExample" >
+        delete from forum_work
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.megagao.production.ssm.domain.ForumWork" >
+        insert into forum_work (work_id, emp_id, work_text, 
+            work_date)
+        values (#{workId,jdbcType=VARCHAR}, #{empId,jdbcType=VARCHAR}, #{workText,jdbcType=VARCHAR}, 
+            #{workDate,jdbcType=DATE})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.ForumWork" >
+        insert into forum_work
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="workId != null" >
+                work_id,
+            </if>
+            <if test="empId != null" >
+                emp_id,
+            </if>
+            <if test="workText != null" >
+                work_text,
+            </if>
+            <if test="workDate != null" >
+                work_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="workId != null" >
+                #{workId,jdbcType=VARCHAR},
+            </if>
+            <if test="empId != null" >
+                #{empId,jdbcType=VARCHAR},
+            </if>
+            <if test="workText != null" >
+                #{workText,jdbcType=VARCHAR},
+            </if>
+            <if test="workDate != null" >
+                #{workDate,jdbcType=DATE},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.megagao.production.ssm.domain.ForumWorkExample" resultType="java.lang.Integer" >
+        select count(*) from forum_work
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update forum_work
+        <set >
+            <if test="record.workId != null" >
+                work_id = #{record.workId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.empId != null" >
+                emp_id = #{record.empId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.workText != null" >
+                work_text = #{record.workText,jdbcType=VARCHAR},
+            </if>
+            <if test="record.workDate != null" >
+                work_date = #{record.workDate,jdbcType=DATE},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update forum_work
+        set work_id = #{record.workId,jdbcType=VARCHAR},
+            emp_id = #{record.empId,jdbcType=VARCHAR},
+            work_text = #{record.workText,jdbcType=VARCHAR},
+            work_date = #{record.workDate,jdbcType=DATE}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.ForumWork" >
+        update forum_work
+        <set >
+            <if test="empId != null" >
+                emp_id = #{empId,jdbcType=VARCHAR},
+            </if>
+            <if test="workText != null" >
+                work_text = #{workText,jdbcType=VARCHAR},
+            </if>
+            <if test="workDate != null" >
+                work_date = #{workDate,jdbcType=DATE},
+            </if>
+        </set>
+        where work_id = #{workId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.ForumWork" >
+        update forum_work
+        set emp_id = #{empId,jdbcType=VARCHAR},
+            work_text = #{workText,jdbcType=VARCHAR},
+            work_date = #{workDate,jdbcType=DATE}
+        where work_id = #{workId,jdbcType=VARCHAR}
+    </update>
+</mapper>

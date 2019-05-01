@@ -7,7 +7,6 @@ import com.megagao.production.ssm.domain.COrderExample;
 import com.megagao.production.ssm.domain.Technology;
 import com.megagao.production.ssm.domain.TechnologyExample;
 import com.megagao.production.ssm.domain.customize.CustomResult;
-import com.megagao.production.ssm.domain.vo.COrderVO;
 import com.megagao.production.ssm.domain.vo.TechnologyVO;
 import com.megagao.production.ssm.mapper.TechnologyMapper;
 import com.megagao.production.ssm.service.TechnologyService;

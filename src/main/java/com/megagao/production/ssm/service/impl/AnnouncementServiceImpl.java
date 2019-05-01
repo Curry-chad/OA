@@ -16,7 +16,6 @@ import com.megagao.production.ssm.domain.AnnouncementExample;
 
 import com.megagao.production.ssm.domain.customize.CustomResult;
 
-import com.megagao.production.ssm.domain.vo.COrderVO;
 
 import com.megagao.production.ssm.domain.vo.AnnouncementVO;
 

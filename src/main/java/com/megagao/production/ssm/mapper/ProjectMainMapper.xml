@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.megagao.production.ssm.mapper.ProjectMainMapper" >
+  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.vo.ProjectMainVO" >
+    <id column="main_id" property="mainId" jdbcType="VARCHAR" />
+    <result column="main_name" property="mainName" jdbcType="VARCHAR" />
+    <result column="main_start" property="mainStart" jdbcType="TIMESTAMP" />
+    <result column="main_end" property="mainEnd" jdbcType="TIMESTAMP" />
+    <result column="main_amount" property="mainAmount" jdbcType="DOUBLE" />
+    <association property="employee" javaType="employee">
+     <id column="emp_id" property="empId" jdbcType="VARCHAR" />
+    <result column="emp_name" property="empName" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="CHAR" />
+    <result column="id_code" property="idCode" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="join_date" property="joinDate" jdbcType="DATE" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="degree" property="degree" jdbcType="VARCHAR" />
+    <result column="major" property="major" jdbcType="VARCHAR" />
+    <result column="graduate_school" property="graduateSchool" jdbcType="VARCHAR" />
+    <result column="education_form" property="educationForm" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+	<!-- 扩展的sql -->
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="ProjectMainVO" resultMap="BaseResultMap">
+		SELECT
+			main_id,
+			main_name,
+			main_amount,
+			main_start,
+			main_end,
+			emp_id
+		FROM
+			project_main
+		<!-- LEFT JOIN employee ON project_main.emp_id = employee.emp_id -->
+	</select>
+	
+	<select id="searchProjectMainByProjectMainId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			main_id,
+			main_name,
+			main_amount,
+			main_start,
+			main_end,
+			emp_id
+		FROM
+			project_main
+		WHERE 
+			main_id like CONCAT('%',#{mainId},'%' ) 
+	</select>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			project_main
+		WHERE
+			main_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<!-- 修改备注-->
+	<update id="updateProjectMainName" parameterType="ProjectMainVO" >
+		UPDATE project_main
+		SET main_name = #{mainName}
+		WHERE
+			main_id = #{mainId,jdbcType=VARCHAR}
+	</update>
+	
+<sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        main_id, main_name, main_amount, emp_id, main_start, main_end
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.ProjectMainExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List" />
+        from project_main
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from project_main
+        where main_id = #{mainId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from project_main
+        where main_id = #{mainId,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.ProjectMainExample" >
+        delete from project_main
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.megagao.production.ssm.domain.ProjectMain" >
+        insert into project_main (main_id, main_name, main_amount, 
+            emp_id, main_start, main_end
+            )
+        values (#{mainId,jdbcType=VARCHAR}, #{mainName,jdbcType=VARCHAR}, #{mainAmount,jdbcType=DOUBLE}, 
+            #{empId,jdbcType=VARCHAR}, #{mainStart,jdbcType=DATE}, #{mainEnd,jdbcType=DATE}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.ProjectMain" >
+        insert into project_main
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="mainId != null" >
+                main_id,
+            </if>
+            <if test="mainName != null" >
+                main_name,
+            </if>
+            <if test="mainAmount != null" >
+                main_amount,
+            </if>
+            <if test="empId != null" >
+                emp_id,
+            </if>
+            <if test="mainStart != null" >
+                main_start,
+            </if>
+            <if test="mainEnd != null" >
+                main_end,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="mainId != null" >
+                #{mainId,jdbcType=VARCHAR},
+            </if>
+            <if test="mainName != null" >
+                #{mainName,jdbcType=VARCHAR},
+            </if>
+            <if test="mainAmount != null" >
+                #{mainAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="empId != null" >
+                #{empId,jdbcType=VARCHAR},
+            </if>
+            <if test="mainStart != null" >
+                #{mainStart,jdbcType=DATE},
+            </if>
+            <if test="mainEnd != null" >
+                #{mainEnd,jdbcType=DATE},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.megagao.production.ssm.domain.ProjectMainExample" resultType="java.lang.Integer" >
+        select count(*) from project_main
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update project_main
+        <set >
+            <if test="record.mainId != null" >
+                main_id = #{record.mainId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.mainName != null" >
+                main_name = #{record.mainName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.mainAmount != null" >
+                main_amount = #{record.mainAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="record.empId != null" >
+                emp_id = #{record.empId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.mainStart != null" >
+                main_start = #{record.mainStart,jdbcType=DATE},
+            </if>
+            <if test="record.mainEnd != null" >
+                main_end = #{record.mainEnd,jdbcType=DATE},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update project_main
+        set main_id = #{record.mainId,jdbcType=VARCHAR},
+            main_name = #{record.mainName,jdbcType=VARCHAR},
+            main_amount = #{record.mainAmount,jdbcType=DOUBLE},
+            emp_id = #{record.empId,jdbcType=VARCHAR},
+            main_start = #{record.mainStart,jdbcType=DATE},
+            main_end = #{record.mainEnd,jdbcType=DATE}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.ProjectMain" >
+        update project_main
+        <set >
+            <if test="mainName != null" >
+                main_name = #{mainName,jdbcType=VARCHAR},
+            </if>
+            <if test="mainAmount != null" >
+                main_amount = #{mainAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="empId != null" >
+                emp_id = #{empId,jdbcType=VARCHAR},
+            </if>
+            <if test="mainStart != null" >
+                main_start = #{mainStart,jdbcType=DATE},
+            </if>
+            <if test="mainEnd != null" >
+                main_end = #{mainEnd,jdbcType=DATE},
+            </if>
+        </set>
+        where main_id = #{mainId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.ProjectMain" >
+        update project_main
+        set main_name = #{mainName,jdbcType=VARCHAR},
+            main_amount = #{mainAmount,jdbcType=DOUBLE},
+            emp_id = #{empId,jdbcType=VARCHAR},
+            main_start = #{mainStart,jdbcType=DATE},
+            main_end = #{mainEnd,jdbcType=DATE}
+        where main_id = #{mainId,jdbcType=VARCHAR}
+    </update>
+</mapper>

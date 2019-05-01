@@ -7,7 +7,7 @@
 	    <input type="hidden" name="deviceCheckId"/>
 	    <table cellpadding="5" >
 	        <tr>
-	            <td>设备名称:</td>
+	            <td>项目名称:</td>
 	            <td>
 	            	<input class="easyui-combobox" name="deviceId" panelHeight="auto" 
     					data-options="editable:false,valueField:'deviceId',textField:'deviceName',
@@ -29,7 +29,7 @@
 	            </td>
 	        </tr>
 	        <tr>
-	            <td>例检故障编号:</td>
+	            <td>例检问题编号:</td>
 	            <td>
 	            	<input class="easyui-textbox" name="deviceCheckFaultId"/>
 	            </td>
@@ -69,7 +69,7 @@
     			deviceCheckEditEditor.sync();
     			$.post("deviceCheck/update",$("#deviceCheckEditForm").serialize(), function(data){
     				if(data.status == 200){
-    					$.messager.alert('提示','修改设备例检成功!','info',function(){
+    					$.messager.alert('提示','修改项目例检成功!','info',function(){
     						$("#deviceCheckEditWindow").window('close');
     						$("#deviceCheck").datagrid("reload");
     					});

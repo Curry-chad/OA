@@ -5,23 +5,23 @@
 <script type="text/javascript" charset="utf-8" src="js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 
 <!-- Table -->
-<table class="easyui-datagrid" id="deviceCheck" title="设备例检列表" 
+<table class="easyui-datagrid" id="deviceCheck" title="项目质量管理列表" 
        data-options="singleSelect:false,collapsible:true,pagination:true,rownumbers:true,
        	url:'deviceCheck/list',method:'get',pageSize:30, fitColumns:true,toolbar:toolbar_deviceCheck">
     <thead>
         <tr>
         	<th data-options="field:'ck',checkbox:true"></th>
-        	<th data-options="field:'deviceCheckId',width:100,align:'center'">设备例检编号</th>
-            <th data-options="field:'deviceId',width:100,align:'center'">设备编号</th>
+        	<th data-options="field:'deviceCheckId',width:100,align:'center'">项目例检编号</th>
+            <th data-options="field:'deviceId',width:100,align:'center'">项目编号</th>
             <th data-options="field:'deviceName',width:100,align:'center',formatter:formatDevice_deviceCheck">
-            	设备名称</th>
+            	项目名称</th>
             <th data-options="field:'deviceCheckEmp',width:100,align:'center',formatter:formatEmp_deviceCheck">
             	例检人</th>
             <th data-options="field:'deviceCheckDate',width:130,align:'center',formatter:TAOTAO.formatDateTime">
             	例检时间</th>
             <th data-options="field:'deviceCheckResult',width:100,align:'center',
             	formatter:formatDeviceCheckResult_deviceCheck">例检结果</th>
-            <th data-options="field:'deviceCheckFaultId',width:100,align:'center'">例检故障编号</th>
+            <th data-options="field:'deviceCheckFaultId',width:100,align:'center'">例检问题编号</th>
         </tr>
     </thead>
 </table>
@@ -63,44 +63,44 @@
             style="width:250px;vertical-align: middle;">
         </input>
         <div id="menu_deviceCheck" style="width:120px"> 
-			<div data-options="name:'deviceCheckId'">设备例检编号</div> 
-			<div data-options="name:'deviceName'">设备名称</div>
+			<div data-options="name:'deviceCheckId'">项目例检编号</div> 
+			<div data-options="name:'deviceName'">项目名称</div>
 		</div>     
     </div>  
 
 </div>
 
 <!-- deviceCheckAddWindow -->
-<div id="deviceCheckAddWindow" class="easyui-window" title="添加设备例检" data-options="modal:true,closed:true,
+<div id="deviceCheckAddWindow" class="easyui-window" title="添加项目例检" data-options="modal:true,closed:true,
 	resizable:true,iconCls:'icon-save',href:'deviceCheck/add'" style="width:65%;height:80%;padding:10px;">
 </div>
 
 <!-- deviceCheckEditWindow -->
-<div id="deviceCheckEditWindow" class="easyui-window" title="编辑设备例检" data-options="modal:true,closed:true,
+<div id="deviceCheckEditWindow" class="easyui-window" title="编辑项目例检" data-options="modal:true,closed:true,
 	resizable:true,iconCls:'icon-save',href:'deviceCheck/edit'" style="width:65%;height:80%;padding:10px;">
 </div>
 
-<!-- 设备信息 -->
-<div id="deviceInfo_deviceCheck" class="easyui-dialog" title="设备信息" data-options="modal:true,closed:true,
+<!-- 项目信息 -->
+<div id="deviceInfo_deviceCheck" class="easyui-dialog" title="项目信息" data-options="modal:true,closed:true,
 	resizable:true,iconCls:'icon-save'" style="width:65%;height:80%;padding:10px;">
 	<form id="deviceEditForm_deviceCheck" method="post">
 	    <table cellpadding="5">
 	        <tr>
-	           	<td>设备编号:</td>
+	           	<td>项目编号:</td>
 	           	<td><input class="easyui-textbox" name="deviceId" data-options="editable:false"/></td>
 	        </tr>
 	        <tr>
-	            <td>设备名称:</td>
+	            <td>项目名称:</td>
 	            <td><input class="easyui-textbox" name="deviceName" data-options="editable:false"/></td>
 	        </tr>
 	        <tr>
-	            <td>设备种类:</td>
+	            <td>项目种类:</td>
 	            <td><input id="deviceTypeName" class="easyui-combobox" name="deviceTypeId" panelHeight="auto" 
 	            	value="01" data-options="editable:false,valueField:'deviceTypeId',textField:'deviceTypeName',
 	            	url:'deviceType/get_data'" /></td>
 	        </tr>
 	        <tr>
-	            <td>设备状态:</td>
+	            <td>项目状态:</td>
 	            <td>
 	            	<select class="easyui-combobox" name="deviceStatusId" panelHeight="auto" 
 	            		data-options="required:true" style="width:173px">
@@ -111,7 +111,7 @@
 					</select></td>
 	        </tr>
 	        <tr>
-	            <td>设备购买日期:</td>
+	            <td>项目购买日期:</td>
 	            <td><input class="easyui-datetimebox" name="devicePurchaseDate"/></td>
 	        </tr>
 	        <tr>
@@ -146,8 +146,8 @@
 	</div>
 </div>
 
-<!-- 设备例检人信息 -->
-<div id="empInfo_deviceCheck" class="easyui-dialog" title="设备例检人信息" data-options="modal:true,closed:true,
+<!-- 项目例检人信息 -->
+<div id="empInfo_deviceCheck" class="easyui-dialog" title="项目例检人信息" data-options="modal:true,closed:true,
 	resizable:true,iconCls:'icon-save'" style="width:33%;height:65%;padding:10px;">
 	<form id="empEditForm_deviceCheck" method="post">
 		<input type="hidden" name="empId"/>
@@ -214,7 +214,7 @@
 	</div>
 </div>
 
-<!-- 设备例检备注信息-->
+<!-- 项目例检备注信息-->
 <div id="deviceCheckResultDialog" class="easyui-dialog" title="备注" data-options="modal:true,closed:true,
 	resizable:true,iconCls:'icon-save'" style="width:55%;height:65%;padding:10px;">
 	<form id="deviceCheckResultForm" class="itemForm" method="post">
@@ -239,15 +239,15 @@
 function doSearch_deviceCheck(value,name){ //用户输入用户名,点击搜素,触发此函数  
 	if(value == null || value == ''){
 		$("#deviceCheck").datagrid({
-	        title:'设备例检列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
+	        title:'项目质量列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get',
 	        	nowrap:true,  
 	        toolbar:"toolbar_deviceCheck", url:'deviceCheck/list', method:'get', loadMsg:'数据加载中......', 
 	        	fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 	             	{field : 'ck', checkbox:true }, 
-	             	{field : 'deviceCheckId', width : 100, align:'center', title : '设备例检编号'},
-	             	{field : 'deviceId', width : 100, align : 'center', title : '设备编号'},
-	             	{field : 'deviceName', width : 100, align : 'center', title : '设备名称', 
+	             	{field : 'deviceCheckId', width : 100, align:'center', title : '项目例检编号'},
+	             	{field : 'deviceId', width : 100, align : 'center', title : '项目编号'},
+	             	{field : 'deviceName', width : 100, align : 'center', title : '项目名称', 
 	             				formatter:formatDevice_deviceCheck}, 
 	             	{field : 'deviceCheckEmp', width : 100, title : '例检人', align:'center',
 	             				formatter:formatEmp_deviceCheck}, 
@@ -260,15 +260,15 @@ function doSearch_deviceCheck(value,name){ //用户输入用户名,点击搜素,
 	    });
 	}else{
 		$("#deviceCheck").datagrid({  
-	        title:'设备例检列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', 
+	        title:'项目例检列表', singleSelect:false, collapsible:true, pagination:true, rownumbers:true, method:'get', 
 	        	nowrap:true,  
 	        toolbar:"toolbar_deviceCheck", url:'deviceCheck/search_deviceCheck_by_'+name+'?searchValue='+value, 
 	        	loadMsg:'数据加载中......', fitColumns:true,//允许表格自动缩放,以适应父容器  
 	        columns : [ [ 
 					{field : 'ck', checkbox:true }, 
-					{field : 'deviceCheckId', width : 100, align:'center', title : '设备例检编号'},
-					{field : 'deviceId', width : 100, align : 'center', title : '设备编号'},
-					{field : 'deviceName', width : 100, align : 'center', title : '设备名称', 
+					{field : 'deviceCheckId', width : 100, align:'center', title : '项目例检编号'},
+					{field : 'deviceId', width : 100, align : 'center', title : '项目编号'},
+					{field : 'deviceName', width : 100, align : 'center', title : '项目名称', 
 								formatter:formatDevice_deviceCheck}, 
 					{field : 'deviceCheckEmp', width : 100, title : '例检人', align:'center',
 								formatter:formatEmp_deviceCheck}, 
@@ -312,11 +312,11 @@ function doSearch_deviceCheck(value,name){ //用户输入用户名,点击搜素,
        			var ids = getDeviceCheckSelectionsIds();
     	    	
     	    	if(ids.length == 0){
-    	    		$.messager.alert('提示','必须选择一个设备例检才能编辑!');
+    	    		$.messager.alert('提示','必须选择一个项目例检才能编辑!');
     	    		return ;
     	    	}
     	    	if(ids.indexOf(',') > 0){
-    	    		$.messager.alert('提示','只能选择一个设备例检信息!');
+    	    		$.messager.alert('提示','只能选择一个项目例检信息!');
     	    		return ;
     	    	}
     	    	
@@ -342,15 +342,15 @@ function doSearch_deviceCheck(value,name){ //用户输入用户名,点击搜素,
        		}else{
        			var ids = getDeviceCheckSelectionsIds();
     	    	if(ids.length == 0){
-    	    		$.messager.alert('提示','未选中设备例检!');
+    	    		$.messager.alert('提示','未选中项目例检!');
     	    		return ;
     	    	}
-    	    	$.messager.confirm('确认','确定删除ID为 '+ids+' 的设备例检吗？',function(r){
+    	    	$.messager.confirm('确认','确定删除ID为 '+ids+' 的项目例检吗？',function(r){
     	    	    if (r){
     	    	    	var params = {"ids":ids};
     	            	$.post("deviceCheck/delete_batch",params, function(data){
     	        			if(data.status == 200){
-    	        				$.messager.alert('提示','删除设备例检成功!',undefined,function(){
+    	        				$.messager.alert('提示','删除项目例检成功!',undefined,function(){
     	        					$("#deviceCheck").datagrid("reload");
     	        				});
     	        			}
@@ -379,7 +379,7 @@ function doSearch_deviceCheck(value,name){ //用户输入用户名,点击搜素,
 	}
 	
 	/************************************ DeviceCheckType Relative Object ************************************/ 
-	//格式化设备名称
+	//格式化项目名称
 	function formatDevice_deviceCheck(value, row, index){ 
 		if(value !=null && value != ''){
 			return "<a href=javascript:openDevice_deviceCheck("+index+")>"+row.deviceName+"</a>";
@@ -389,7 +389,7 @@ function doSearch_deviceCheck(value,name){ //用户输入用户名,点击搜素,
 	};
 	/* DeviceCheckType Relative Object */ 
 	
-	//打开设备对话框
+	//打开项目对话框
 	function  openDevice_deviceCheck(index){ 
 		var row = onDeviceCheckClickRow(index);
 		$("#deviceInfo_deviceCheck").dialog({
@@ -413,7 +413,7 @@ function doSearch_deviceCheck(value,name){ //用户输入用户名,点击搜素,
     	}).dialog("open");
 	};
 	
-	//提交设备信息
+	//提交项目信息
 	function submitDeviceEditForm_deviceCheck(){
 		$.get("deviceList/edit_judge",'',function(data){
     		if(data.msg != null){
@@ -427,7 +427,7 @@ function doSearch_deviceCheck(value,name){ //用户输入用户名,点击搜素,
     			noteEditor_device_deviceCheck.sync();
     			$.post("deviceList/update_all",$("#deviceEditForm_deviceCheck").serialize(), function(data){
     				if(data.status == 200){
-    					$.messager.alert('提示','修改设备信息成功!','info',function(){
+    					$.messager.alert('提示','修改项目信息成功!','info',function(){
     						$("#deviceInfo_deviceCheck").dialog("close");
     					});
     				}else{
@@ -464,7 +464,7 @@ function doSearch_deviceCheck(value,name){ //用户输入用户名,点击搜素,
     	}).dialog("open");
 	};
 	
-	//提交设备例检人信息
+	//提交项目例检人信息
 	function submitEmpEditForm_deviceCheck(){
 		$.get("employee/edit_judge",'',function(data){
     		if(data.msg != null){
@@ -488,7 +488,7 @@ function doSearch_deviceCheck(value,name){ //用户输入用户名,点击搜素,
 	}
 	
 	/************************************ NoteRelative Object ************************************/
-	//格式化设备例检结果
+	//格式化项目例检结果
 	function formatDeviceCheckResult_deviceCheck(value, row, index){ 
 		if(value !=null && value != ''){
 			return "<a href=javascript:openDeviceCheckResult("+index+")>"+"查看"+"</a>";
@@ -522,7 +522,7 @@ function doSearch_deviceCheck(value,name){ //用户输入用户名,点击搜素,
     				if(data.status == 200){
     					$("#deviceCheckResultDialog").dialog("close");
     					$("#deviceCheck").datagrid("reload");
-    					$.messager.alert("操作提示", "更新设备例检结果成功！");
+    					$.messager.alert("操作提示", "更新项目例检结果成功！");
     				}else{
     					$.messager.alert("操作提示",  data.msg);
     				}

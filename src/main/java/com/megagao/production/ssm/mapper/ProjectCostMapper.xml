@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.megagao.production.ssm.mapper.ProjectCostMapper" >
+  <resultMap id="BaseResultMap" type="com.megagao.production.ssm.domain.vo.ProjectCostVO" >
+    <id column="cost_id" property="costId" jdbcType="VARCHAR" />
+    <result column="cost_expect" property="costExpect" jdbcType="DOUBLE" />
+    <result column="cost_fact" property="costFact" jdbcType="DOUBLE" />
+    <association property="projectMain" javaType="ProjectMain">
+     <id column="main_id" property="mainId" jdbcType="VARCHAR" />
+    <result column="main_name" property="mainName" jdbcType="VARCHAR" />
+    <result column="main_start" property="mainStart" jdbcType="TIMESTAMP" />
+    <result column="main_end" property="mainEnd" jdbcType="TIMESTAMP" />
+    <result column="main_amount" property="mainAmount" jdbcType="DOUBLE" />
+    </association>
+  </resultMap>
+	<!-- 扩展的sql -->
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="ProjectCostVO" resultMap="BaseResultMap">
+		SELECT
+			cost_id,
+			main_id,
+			cost_expect,
+			cost_fact
+		FROM
+			project_cost
+		<!-- LEFT JOIN employee ON project_time.emp_id = employee.emp_id -->
+	</select>
+	
+	<select id="searchProjectCostByProjectCostId" parameterType="string" resultMap="BaseResultMap">
+		SELECT
+			cost_id,
+			main_id,
+			cost_expect,
+			cost_fact
+		FROM
+			project_cost
+		WHERE 
+			cost_id like CONCAT('%',#{costId},'%' ) 
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteBatch">
+		DELETE
+		FROM
+			project_cost
+		WHERE
+			cost_id IN
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	
+<sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        cost_id, main_id, cost_expect, cost_fact
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.megagao.production.ssm.domain.ProjectCostExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List" />
+        from project_cost
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from project_cost
+        where cost_id = #{costId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from project_cost
+        where cost_id = #{costId,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.megagao.production.ssm.domain.ProjectCostExample" >
+        delete from project_cost
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.megagao.production.ssm.domain.ProjectCost" >
+        insert into project_cost (cost_id, main_id, cost_expect, 
+            cost_fact)
+        values (#{costId,jdbcType=VARCHAR}, #{mainId,jdbcType=VARCHAR}, #{costExpect,jdbcType=DOUBLE}, 
+            #{costFact,jdbcType=DOUBLE})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.megagao.production.ssm.domain.ProjectCost" >
+        insert into project_cost
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="costId != null" >
+                cost_id,
+            </if>
+            <if test="mainId != null" >
+                main_id,
+            </if>
+            <if test="costExpect != null" >
+                cost_expect,
+            </if>
+            <if test="costFact != null" >
+                cost_fact,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="costId != null" >
+                #{costId,jdbcType=VARCHAR},
+            </if>
+            <if test="mainId != null" >
+                #{mainId,jdbcType=VARCHAR},
+            </if>
+            <if test="costExpect != null" >
+                #{costExpect,jdbcType=DOUBLE},
+            </if>
+            <if test="costFact != null" >
+                #{costFact,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.megagao.production.ssm.domain.ProjectCostExample" resultType="java.lang.Integer" >
+        select count(*) from project_cost
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update project_cost
+        <set >
+            <if test="record.costId != null" >
+                cost_id = #{record.costId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.mainId != null" >
+                main_id = #{record.mainId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.costExpect != null" >
+                cost_expect = #{record.costExpect,jdbcType=DOUBLE},
+            </if>
+            <if test="record.costFact != null" >
+                cost_fact = #{record.costFact,jdbcType=DOUBLE},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update project_cost
+        set cost_id = #{record.costId,jdbcType=VARCHAR},
+            main_id = #{record.mainId,jdbcType=VARCHAR},
+            cost_expect = #{record.costExpect,jdbcType=DOUBLE},
+            cost_fact = #{record.costFact,jdbcType=DOUBLE}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.megagao.production.ssm.domain.ProjectCost" >
+        update project_cost
+        <set >
+            <if test="mainId != null" >
+                main_id = #{mainId,jdbcType=VARCHAR},
+            </if>
+            <if test="costExpect != null" >
+                cost_expect = #{costExpect,jdbcType=DOUBLE},
+            </if>
+            <if test="costFact != null" >
+                cost_fact = #{costFact,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where cost_id = #{costId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.megagao.production.ssm.domain.ProjectCost" >
+        update project_cost
+        set main_id = #{mainId,jdbcType=VARCHAR},
+            cost_expect = #{costExpect,jdbcType=DOUBLE},
+            cost_fact = #{costFact,jdbcType=DOUBLE}
+        where cost_id = #{costId,jdbcType=VARCHAR}
+    </update>
+    </mapper>
