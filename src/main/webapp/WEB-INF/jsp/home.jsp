@@ -117,9 +117,7 @@
 			<ul id="materialMonitor" class="easyui-tree" data-options="animate:true,lines:true">
 				<li><span>邮件管理 </span>
 					<ul>
-						<li id=41 data-options="attributes:{'url':'material/find'}">发件箱</li>
-						<li id=42 data-options="attributes:{'url':'materialReceive/find'}">收件箱</li>
-				    	<li id=43 data-options="attributes:{'url':'materialConsume/find'}">查询邮件</li>	 					
+						<li id=41 data-options="attributes:{'url':'email/find'}">邮件管理系统</li>			
 					</ul>
 				</li>
 			</ul>
